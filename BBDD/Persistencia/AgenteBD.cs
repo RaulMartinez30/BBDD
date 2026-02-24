@@ -14,7 +14,7 @@ namespace Company.persistence
 
         private AgenteBD()
         {
-            AgenteBD.connectionString = "server=localhost;database=Company;uid=root;pwd=password;CharSet=utf8;";
+            AgenteBD.connectionString = "server=localhost;database=Company;uid=root;pwd=1234;CharSet=utf8;";
             AgenteBD.connection = new MySqlConnection(AgenteBD.connectionString);
         }
         public static AgenteBD GetInstance()
