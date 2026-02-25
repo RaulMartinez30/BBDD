@@ -106,6 +106,7 @@
             UPDATE_botton.TabIndex = 6;
             UPDATE_botton.Text = "UPDATE";
             UPDATE_botton.UseVisualStyleBackColor = true;
+            UPDATE_botton.Click += UPDATE_botton_Click;
             // 
             // DELETE_botton
             // 
@@ -115,6 +116,7 @@
             DELETE_botton.TabIndex = 8;
             DELETE_botton.Text = "DELETE";
             DELETE_botton.UseVisualStyleBackColor = true;
+            DELETE_botton.Click += this.DELETE_botton_Click;
             // 
             // CLEAN_botton
             // 
@@ -133,6 +135,7 @@
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(319, 404);
             listBox1.TabIndex = 10;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // numericUpDown1
             // 

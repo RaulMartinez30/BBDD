@@ -39,7 +39,12 @@ namespace BBDD.Presentacion
 
         private void CLEAN_botton_Click(object sender, EventArgs e)
         {
-
+            txtIdCountry.Text = string.Empty;
+            txtNameCountry.Text = string.Empty;
+            numTaxBaseCountry.Value = 0;
+            btnAdd.Enebled = true;
+            btnDelete.Enabled = false;
+            //NO SE SI FALTA ALGO [NO HAY FOTO DE MAS]
         }
 
         private void ADD_botton_Click(object sender, EventArgs e)
@@ -89,6 +94,36 @@ namespace BBDD.Presentacion
                 }
             }
             return id;
+        }
+
+        private void UPDATE_botton_Click(object sender, EventArgs e)
+        {
+            if (txtIdCountry.Text != string.Empty && txtNameCountry.Text != string.Empty)
+            {
+
+                Country c = new Country(txtIdCountry.Text);
+                c.Name = txtNameCountry.Text;
+                c.TaxBase = numTaxBaseCountry.Value;
+                try
+                {
+                    int val = c.UpdateCountry();
+                    if (val == 1)
+                    {
+                        int index = lstCountries.SeletedIndex;
+                        lstCounties.Items.RemoveAt(index);
+                        lstCountries.Items.InsertAt(index, c);
+                        btnClear.PerformClick();
+                    }
+                    else { } //FALTAN COSAS [NO HAY FOTO]
+                }
+                catch { }//FALTAN COSAS [NO HAY FOTO]
+
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
