@@ -67,7 +67,6 @@ namespace BBDD.Presentacion
             ADD_botton.Enabled = true;
             DELETE_botton.Enabled = false;
             lstPaises.ClearSelected();
-            //NO SE SI FALTA ALGO [NO HAY FOTO DE MAS]
         }
 
         private void ADD_botton_Click(object sender, EventArgs e)
@@ -137,9 +136,13 @@ namespace BBDD.Presentacion
                         lstPaises.Items.Insert(index, c);
                         CLEAN_botton.PerformClick();
                     }
-                    else { } //FALTAN COSAS [NO HAY FOTO]
+                    else {
+                        MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } 
                 }
-                catch { }//FALTAN COSAS [NO HAY FOTO]
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
         }
@@ -177,7 +180,7 @@ namespace BBDD.Presentacion
                     }
                     else
                     {
-                        MessageBox.Show("DELETRE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
