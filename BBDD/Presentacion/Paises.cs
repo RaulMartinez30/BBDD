@@ -19,7 +19,28 @@ namespace BBDD.Presentacion
 
         private void Paises_Load(object sender, EventArgs e)
         {
+            Country aux = new Country();
+            try
+            {
+                List<Country> countries = aux.ReadAllCountries();
 
+                foreach (Country country in countries)
+                {
+                    lstCountries.Items.Add(country);
+
+                }
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+
+                txtIdCountry.Enabled = false;
+
+
+            }
+            catch (Exception ex)
+            { 
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            }
         }
 
         private void ID_label_Click(object sender, EventArgs e)
@@ -32,8 +53,36 @@ namespace BBDD.Presentacion
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Supongo que esto es el boton de delete
         {
+          if (txtIdCountry.Text != string.Empty)
+          {
+            
+            try
+            {
+                    int val = c.DeleteCountry();
+                    if (val == 1)
+                    {
+                        lstCountries.Items.RemoveAt(lstCountries.SelectedIndex);
+                        btnClear.PerformClick();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("DELETRE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+            }
+             
+            catch (Exception ex)
+            {
+
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
+            }
+
 
         }
 
@@ -123,6 +172,20 @@ namespace BBDD.Presentacion
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+               if(lstCountries.SelectedItem != null)
+               {
+                Country country = (Country)lstCountries.SelectedItem;
+                txtIdCountry.Text = country.Id;
+                txtNameCountry.Text = country.Name;
+                numTaxBaseCountry.Value = country.TaxBase;
+                btnDelete.Enabled = true;
+                btnUpdate.Enabled = true;
+                btnAdd.Enabled = false;
+
+               }
+
+
 
         }
     }
