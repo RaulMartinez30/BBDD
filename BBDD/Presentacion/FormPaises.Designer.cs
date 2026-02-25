@@ -1,6 +1,6 @@
 ﻿namespace BBDD.Presentacion
 {
-    partial class Paises
+    partial class FormPaises
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            getID = new TextBox();
+            txtIDPais = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
+            txtNamePais = new TextBox();
             label3 = new Label();
             ADD_botton = new Button();
             UPDATE_botton = new Button();
             DELETE_botton = new Button();
             CLEAN_botton = new Button();
-            listBox1 = new ListBox();
-            numericUpDown1 = new NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            lstPaises = new ListBox();
+            numImpuestosPais = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)numImpuestosPais).BeginInit();
             SuspendLayout();
             // 
-            // getID
+            // txtIDPais
             // 
-            getID.Location = new Point(502, 47);
-            getID.Name = "getID";
-            getID.Size = new Size(182, 27);
-            getID.TabIndex = 0;
+            txtIDPais.Location = new Point(502, 47);
+            txtIDPais.Name = "txtIDPais";
+            txtIDPais.Size = new Size(182, 27);
+            txtIDPais.TabIndex = 0;
             // 
             // label1
             // 
@@ -70,12 +70,12 @@
             label2.TabIndex = 3;
             label2.Text = "Name:";
             // 
-            // textBox2
+            // txtNamePais
             // 
-            textBox2.Location = new Point(502, 104);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(182, 27);
-            textBox2.TabIndex = 2;
+            txtNamePais.Location = new Point(502, 104);
+            txtNamePais.Name = "txtNamePais";
+            txtNamePais.Size = new Size(182, 27);
+            txtNamePais.TabIndex = 2;
             // 
             // label3
             // 
@@ -116,7 +116,7 @@
             DELETE_botton.TabIndex = 8;
             DELETE_botton.Text = "DELETE";
             DELETE_botton.UseVisualStyleBackColor = true;
-            DELETE_botton.Click += this.DELETE_botton_Click;
+            DELETE_botton.Click += DELETE_botton_Click;
             // 
             // CLEAN_botton
             // 
@@ -128,59 +128,60 @@
             CLEAN_botton.UseVisualStyleBackColor = true;
             CLEAN_botton.Click += CLEAN_botton_Click;
             // 
-            // listBox1
+            // lstPaises
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(36, 12);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(319, 404);
-            listBox1.TabIndex = 10;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            lstPaises.FormattingEnabled = true;
+            lstPaises.Location = new Point(36, 12);
+            lstPaises.Name = "lstPaises";
+            lstPaises.Size = new Size(319, 404);
+            lstPaises.TabIndex = 10;
+            lstPaises.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
-            // numericUpDown1
+            // numImpuestosPais
             // 
-            numericUpDown1.DecimalPlaces = 2;
-            numericUpDown1.Location = new Point(502, 165);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(182, 27);
-            numericUpDown1.TabIndex = 11;
+            numImpuestosPais.DecimalPlaces = 2;
+            numImpuestosPais.Location = new Point(502, 165);
+            numImpuestosPais.Name = "numImpuestosPais";
+            numImpuestosPais.Size = new Size(182, 27);
+            numImpuestosPais.TabIndex = 11;
+            numImpuestosPais.ValueChanged += numNamePais_ValueChanged;
             // 
             // Paises
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(737, 447);
-            Controls.Add(numericUpDown1);
-            Controls.Add(listBox1);
+            Controls.Add(numImpuestosPais);
+            Controls.Add(lstPaises);
             Controls.Add(CLEAN_botton);
             Controls.Add(DELETE_botton);
             Controls.Add(UPDATE_botton);
             Controls.Add(ADD_botton);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(textBox2);
+            Controls.Add(txtNamePais);
             Controls.Add(label1);
-            Controls.Add(getID);
+            Controls.Add(txtIDPais);
             Name = "Paises";
             Text = "GIT";
             Load += Paises_Load;
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numImpuestosPais).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox getID;
+        private TextBox txtIDPais;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox txtNamePais;
         private Label label3;
         private Button ADD_botton;
         private Button UPDATE_botton;
         private Button DELETE_botton;
         private Button CLEAN_botton;
-        private ListBox listBox1;
-        private NumericUpDown numericUpDown1;
+        private ListBox lstPaises;
+        private NumericUpDown numImpuestosPais;
     }
 }
