@@ -29,7 +29,12 @@ namespace BBDD.Dominio
 
         public List<Pais> ReadAllPaises()
         {
+            return _dao.ReadAll();
+        }
 
+        public int InsertPais()
+        {
+            return _dao.Insert(this);
         }
 
         public int UpdatePais()
