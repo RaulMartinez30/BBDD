@@ -26,7 +26,7 @@ namespace BBDD.Dominio
 
         public void Read(Pais p)
         {
-            string sql = "SELECT * FROM countries WHERE idCountry = " + p.Id + "";
+            string sql = "SELECT * FROM countries WHERE idCountry = '" + p.Id + "'";
             List<String[]> data = AgenteBD.GetInstance().Read(sql);
             if (data.Count > 0)
             {
@@ -36,27 +36,29 @@ namespace BBDD.Dominio
             }
         }
 
-        public int Insert (Pais p)
+        public int Insert(Pais p)
         {
-            string sql = "INSERT INTO countries VALUES (" + p.Id + ", " + p.Name + ", " + p.Impuestos + "";
+            // AQUI FALTABAN LAS COMILLAS SIMPLES EN EL ID Y EL NOMBRE
+            string sql = "INSERT INTO countries VALUES ('" + p.Id + "', '" + p.Name + "', " + p.Impuestos + ")";
             return AgenteBD.GetInstance().Change(sql);
         }
 
         public int Update(Pais p)
         {
-            string sql = "UPDATE countries SET couName = " + p.Name + ", " + p.Impuestos + "";
+            // AQUI SOBRABA LA "s" AL FINAL Y FALTABA EL WHERE (¡MUY IMPORTANTE!)
+            string sql = "UPDATE countries SET couName = '" + p.Name + "', couTaxBase = " + p.Impuestos + " WHERE idCountry = '" + p.Id + "'";
             return AgenteBD.GetInstance().Change(sql);
         }
 
         public int Delete(Pais p)
         {
-            string sql = "DELETE FROM countries WHERE idCountry = " + p.Id + "";
+            string sql = "DELETE FROM countries WHERE idCountry = '" + p.Id + "'";
             return AgenteBD.GetInstance().Change(sql);
         }
 
         internal bool CheckIfIdExists(String id)
         {
-            string sql = "SELECT * FROM countries WHERE idCountry = " + id + "";
+            string sql = "SELECT * FROM countries WHERE idCountry = '" + id + "'";
             List<String[]> data = AgenteBD.GetInstance().Read(sql);
             return data.Count > 0;
         }
