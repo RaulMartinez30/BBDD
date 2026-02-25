@@ -38,14 +38,14 @@ namespace BBDD.Dominio
 
         public int Insert(Pais p)
         {
-            // AQUI FALTABAN LAS COMILLAS SIMPLES EN EL ID Y EL NOMBRE
+            
             string sql = "INSERT INTO countries VALUES ('" + p.Id + "', '" + p.Name + "', " + p.Impuestos + ")";
             return AgenteBD.GetInstance().Change(sql);
         }
 
         public int Update(Pais p)
         {
-            // AQUI SOBRABA LA "s" AL FINAL Y FALTABA EL WHERE (¡MUY IMPORTANTE!)
+            
             string sql = "UPDATE countries SET couName = '" + p.Name + "', couTaxBase = " + p.Impuestos + " WHERE idCountry = '" + p.Id + "'";
             return AgenteBD.GetInstance().Change(sql);
         }
