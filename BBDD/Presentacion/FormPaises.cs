@@ -28,7 +28,7 @@ namespace BBDD.Presentacion
             Pais aux = new Pais();
             try
             {
-                List<Pais> countries = aux.ReadAllCountries();
+                List<Pais> countries = aux.ReadAllPaises();
 
                 foreach (Pais country in countries)
                 {
@@ -76,8 +76,8 @@ namespace BBDD.Presentacion
             {
                 string id = getId(txtNamePais.Text);
                 Pais c = new Pais(id);
-                c.name = txtNamePais.Text;
-                c.TaxBase = numImpuestosPais.Value;
+                c.Name = txtNamePais.Text;
+                c.Impuestos = numImpuestosPais.Value;
                 try
                 {
                     if (c.InsertPais() == 1)
@@ -126,7 +126,7 @@ namespace BBDD.Presentacion
 
                 Pais c = new Pais(txtIDPais.Text);
                 c.Name = txtNamePais.Text;
-                c.TaxBase = numImpuestosPais.Value;
+                c.Impuestos = numImpuestosPais.Value;
                 try
                 {
                     int val = c.UpdatePais();
@@ -152,7 +152,7 @@ namespace BBDD.Presentacion
                 Pais country = (Pais)lstPaises.SelectedItem;
                 txtIDPais.Text = country.Id;
                 txtNamePais.Text = country.Name;
-                numImpuestosPais.Value = country.TaxBase;
+                numImpuestosPais.Value = country.Impuestos;
                 DELETE_botton.Enabled = true;
                 UPDATE_botton.Enabled = true;
                 ADD_botton.Enabled = false;
@@ -163,6 +163,7 @@ namespace BBDD.Presentacion
 
         private void DELETE_botton_Click(object sender, EventArgs e)
         {
+            Pais c = new Pais (txtIDPais.Text);
             if (txtIDPais.Text != string.Empty)
             {
                 try
