@@ -32,8 +32,8 @@
             Paises = new TabPage();
             Empleados = new TabPage();
             Oficina = new TabPage();
-            fileSystemWatcher1 = new FileSystemWatcher();
             Posicion = new TabPage();
+            fileSystemWatcher1 = new FileSystemWatcher();
             TablaControlForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
@@ -70,6 +70,7 @@
             Empleados.TabIndex = 1;
             Empleados.Text = "Empleados";
             Empleados.UseVisualStyleBackColor = true;
+            Empleados.Click += Empleados_Click;
             // 
             // Oficina
             // 
@@ -80,11 +81,6 @@
             Oficina.Text = "Oficina";
             Oficina.UseVisualStyleBackColor = true;
             // 
-            // fileSystemWatcher1
-            // 
-            fileSystemWatcher1.EnableRaisingEvents = true;
-            fileSystemWatcher1.SynchronizingObject = this;
-            // 
             // Posicion
             // 
             Posicion.Location = new Point(4, 29);
@@ -93,6 +89,11 @@
             Posicion.TabIndex = 3;
             Posicion.Text = "Posición";
             Posicion.UseVisualStyleBackColor = true;
+            // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
             // 
             // FormPrincipal
             // 
