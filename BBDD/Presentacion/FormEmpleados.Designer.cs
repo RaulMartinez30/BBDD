@@ -41,13 +41,14 @@
             txtIDPais = new TextBox();
             Pais_labbel = new Label();
             cmbPaises = new ComboBox();
+            labbel_tabla = new Label();
             ((System.ComponentModel.ISupportInitialize)numImpuestosPais).BeginInit();
             SuspendLayout();
             // 
             // numImpuestosPais
             // 
             numImpuestosPais.DecimalPlaces = 2;
-            numImpuestosPais.Location = new Point(490, 163);
+            numImpuestosPais.Location = new Point(503, 169);
             numImpuestosPais.Name = "numImpuestosPais";
             numImpuestosPais.Size = new Size(182, 27);
             numImpuestosPais.TabIndex = 22;
@@ -55,14 +56,15 @@
             // lstEmpleados
             // 
             lstEmpleados.FormattingEnabled = true;
-            lstEmpleados.Location = new Point(24, 34);
+            lstEmpleados.Location = new Point(34, 54);
             lstEmpleados.Name = "lstEmpleados";
-            lstEmpleados.Size = new Size(319, 404);
+            lstEmpleados.Size = new Size(319, 344);
             lstEmpleados.TabIndex = 21;
+            lstEmpleados.SelectedIndexChanged += lstEmpleados_SelectedIndexChanged;
             // 
             // CLEAN_botton
             // 
-            CLEAN_botton.Location = new Point(588, 345);
+            CLEAN_botton.Location = new Point(601, 351);
             CLEAN_botton.Name = "CLEAN_botton";
             CLEAN_botton.Size = new Size(94, 29);
             CLEAN_botton.TabIndex = 20;
@@ -71,7 +73,7 @@
             // 
             // DELETE_botton
             // 
-            DELETE_botton.Location = new Point(440, 345);
+            DELETE_botton.Location = new Point(453, 351);
             DELETE_botton.Name = "DELETE_botton";
             DELETE_botton.Size = new Size(94, 29);
             DELETE_botton.TabIndex = 19;
@@ -80,7 +82,7 @@
             // 
             // UPDATE_botton
             // 
-            UPDATE_botton.Location = new Point(588, 286);
+            UPDATE_botton.Location = new Point(601, 292);
             UPDATE_botton.Name = "UPDATE_botton";
             UPDATE_botton.Size = new Size(94, 29);
             UPDATE_botton.TabIndex = 18;
@@ -89,7 +91,7 @@
             // 
             // ADD_botton
             // 
-            ADD_botton.Location = new Point(440, 286);
+            ADD_botton.Location = new Point(453, 292);
             ADD_botton.Name = "ADD_botton";
             ADD_botton.Size = new Size(94, 29);
             ADD_botton.TabIndex = 17;
@@ -100,7 +102,7 @@
             // 
             IBAN.AutoSize = true;
             IBAN.BorderStyle = BorderStyle.FixedSingle;
-            IBAN.Location = new Point(406, 163);
+            IBAN.Location = new Point(419, 169);
             IBAN.Name = "IBAN";
             IBAN.Size = new Size(52, 22);
             IBAN.TabIndex = 16;
@@ -110,7 +112,7 @@
             // 
             label2.AutoSize = true;
             label2.BorderStyle = BorderStyle.FixedSingle;
-            label2.Location = new Point(404, 105);
+            label2.Location = new Point(417, 111);
             label2.Name = "label2";
             label2.Size = new Size(54, 22);
             label2.TabIndex = 15;
@@ -118,7 +120,7 @@
             // 
             // txtNamePais
             // 
-            txtNamePais.Location = new Point(490, 102);
+            txtNamePais.Location = new Point(503, 108);
             txtNamePais.Name = "txtNamePais";
             txtNamePais.Size = new Size(182, 27);
             txtNamePais.TabIndex = 14;
@@ -128,7 +130,7 @@
             label1.AccessibleName = "ID";
             label1.AutoSize = true;
             label1.BorderStyle = BorderStyle.FixedSingle;
-            label1.Location = new Point(429, 48);
+            label1.Location = new Point(442, 54);
             label1.Name = "label1";
             label1.Size = new Size(29, 22);
             label1.TabIndex = 13;
@@ -137,7 +139,7 @@
             // 
             // txtIDPais
             // 
-            txtIDPais.Location = new Point(490, 45);
+            txtIDPais.Location = new Point(503, 51);
             txtIDPais.Name = "txtIDPais";
             txtIDPais.Size = new Size(182, 27);
             txtIDPais.TabIndex = 12;
@@ -146,7 +148,7 @@
             // 
             Pais_labbel.AutoSize = true;
             Pais_labbel.BorderStyle = BorderStyle.FixedSingle;
-            Pais_labbel.Location = new Point(422, 219);
+            Pais_labbel.Location = new Point(435, 225);
             Pais_labbel.Name = "Pais_labbel";
             Pais_labbel.Size = new Size(36, 22);
             Pais_labbel.TabIndex = 24;
@@ -155,16 +157,29 @@
             // cmbPaises
             // 
             cmbPaises.FormattingEnabled = true;
-            cmbPaises.Location = new Point(490, 213);
+            cmbPaises.Location = new Point(503, 219);
             cmbPaises.Name = "cmbPaises";
             cmbPaises.Size = new Size(151, 28);
             cmbPaises.TabIndex = 25;
+            // 
+            // labbel_tabla
+            // 
+            labbel_tabla.AccessibleName = "ID";
+            labbel_tabla.AutoSize = true;
+            labbel_tabla.BorderStyle = BorderStyle.FixedSingle;
+            labbel_tabla.Location = new Point(34, 29);
+            labbel_tabla.Name = "labbel_tabla";
+            labbel_tabla.Size = new Size(49, 22);
+            labbel_tabla.TabIndex = 26;
+            labbel_tabla.Text = "Tabla:";
+            labbel_tabla.Click += label3_Click;
             // 
             // FormEmpleados
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(labbel_tabla);
             Controls.Add(cmbPaises);
             Controls.Add(Pais_labbel);
             Controls.Add(numImpuestosPais);
@@ -201,5 +216,6 @@
         private TextBox txtIDPais;
         private Label Pais_labbel;
         private ComboBox cmbPaises;
+        private Label labbel_tabla;
     }
 }

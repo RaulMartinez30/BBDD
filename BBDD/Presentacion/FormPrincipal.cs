@@ -30,38 +30,54 @@ namespace BBDD.Presentacion
             fPaises.Show();
         }
 
-        private void Paises_Click(object sender, EventArgs e)
+        private void TablaControlForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 1. Limpiamos la pestaña por si ya tiene algo
-            this.Paises.Controls.Clear();
-
-            // 2. Creamos la instancia de tu formulario de países
-            FormPaises fPaises = new FormPaises();
-
-            // 3. Configuración "Ninja" para que se pegue al hueco
-            fPaises.TopLevel = false;
-            fPaises.FormBorderStyle = FormBorderStyle.None;
-            fPaises.Dock = DockStyle.Fill;
-
-            // 4. Lo metemos en la TabPage "Paises"
-            this.Paises.Controls.Add(fPaises);
-            fPaises.Show();
+            // --- Lógica para PAÍSES ---
+            if (TablaControlForm.SelectedTab == Paises)
+            {
+                if (Paises.Controls.Count == 0)
+                {
+                    FormPaises f = new FormPaises();
+                    CargarFormEnTab(f, Paises);
+                }
+            }
+            // --- Lógica para EMPLEADOS ---
+            else if (TablaControlForm.SelectedTab == Empleados)
+            {
+                if (Empleados.Controls.Count == 0)
+                {
+                    FormEmpleados f = new FormEmpleados();
+                    CargarFormEnTab(f, Empleados);
+                }
+            }
+            // --- Lógica para OFICINA ---
+            else if (TablaControlForm.SelectedTab == Oficina)
+            {
+                if (Oficina.Controls.Count == 0)
+                {
+                    FormOficina f = new FormOficina();
+                    CargarFormEnTab(f, Oficina);
+                }
+            }
+            // --- Lógica para POSICIÓN ---
+            else if (TablaControlForm.SelectedTab == Posicion)
+            {
+                if (Posicion.Controls.Count == 0)
+                {
+                    FormPosicion f = new FormPosicion();
+                    CargarFormEnTab(f, Posicion);
+                }
+            }
         }
 
-        private void Empleados_Click(object sender, EventArgs e)
+        // Método auxiliar para no escribir lo mismo 4 veces (Limpieza nivel pro)
+        private void CargarFormEnTab(Form formularioHijo, TabPage pestañaDestino)
         {
-            // Limpiamos la pestaña por si acaso ya habias dado click antes
-            this.Empleados.Controls.Clear();
-
-            // Creamos la interfaz de empleados
-            FormEmpleados fEmpleados = new FormEmpleados();
-            fEmpleados.TopLevel = false;
-            fEmpleados.FormBorderStyle = FormBorderStyle.None;
-            fEmpleados.Dock = DockStyle.Fill;
-
-            // Lo enchufamos a la pestaña
-            this.Empleados.Controls.Add(fEmpleados);
-            fEmpleados.Show();
+            formularioHijo.TopLevel = false;
+            formularioHijo.FormBorderStyle = FormBorderStyle.None;
+            formularioHijo.Dock = DockStyle.Fill;
+            pestañaDestino.Controls.Add(formularioHijo);
+            formularioHijo.Show();
         }
     }
 }

@@ -49,6 +49,7 @@
             TablaControlForm.SelectedIndex = 0;
             TablaControlForm.Size = new Size(803, 448);
             TablaControlForm.TabIndex = 0;
+            TablaControlForm.SelectedIndexChanged += TablaControlForm_SelectedIndexChanged;
             // 
             // Paises
             // 
@@ -59,7 +60,6 @@
             Paises.TabIndex = 0;
             Paises.Text = "Paises";
             Paises.UseVisualStyleBackColor = true;
-            Paises.Click += Paises_Click;
             // 
             // Empleados
             // 
@@ -70,7 +70,6 @@
             Empleados.TabIndex = 1;
             Empleados.Text = "Empleados";
             Empleados.UseVisualStyleBackColor = true;
-            Empleados.Click += Empleados_Click;
             // 
             // Oficina
             // 

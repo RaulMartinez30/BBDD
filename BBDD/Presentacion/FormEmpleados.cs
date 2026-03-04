@@ -43,5 +43,15 @@ namespace BBDD.Presentacion
                 MessageBox.Show("Error cargando países: " + ex.Message);
             }
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstEmpleados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -39,6 +39,7 @@
             CLEAN_botton = new Button();
             lstPaises = new ListBox();
             numImpuestosPais = new NumericUpDown();
+            labbel_tabla = new Label();
             ((System.ComponentModel.ISupportInitialize)numImpuestosPais).BeginInit();
             SuspendLayout();
             // 
@@ -131,9 +132,9 @@
             // lstPaises
             // 
             lstPaises.FormattingEnabled = true;
-            lstPaises.Location = new Point(36, 12);
+            lstPaises.Location = new Point(33, 50);
             lstPaises.Name = "lstPaises";
-            lstPaises.Size = new Size(319, 404);
+            lstPaises.Size = new Size(319, 344);
             lstPaises.TabIndex = 10;
             lstPaises.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -146,11 +147,23 @@
             numImpuestosPais.TabIndex = 11;
             numImpuestosPais.ValueChanged += numNamePais_ValueChanged;
             // 
-            // Paises
+            // labbel_tabla
+            // 
+            labbel_tabla.AccessibleName = "ID";
+            labbel_tabla.AutoSize = true;
+            labbel_tabla.BorderStyle = BorderStyle.FixedSingle;
+            labbel_tabla.Location = new Point(33, 25);
+            labbel_tabla.Name = "labbel_tabla";
+            labbel_tabla.Size = new Size(49, 22);
+            labbel_tabla.TabIndex = 12;
+            labbel_tabla.Text = "Tabla:";
+            // 
+            // FormPaises
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(737, 447);
+            Controls.Add(labbel_tabla);
             Controls.Add(numImpuestosPais);
             Controls.Add(lstPaises);
             Controls.Add(CLEAN_botton);
@@ -162,7 +175,7 @@
             Controls.Add(txtNamePais);
             Controls.Add(label1);
             Controls.Add(txtIDPais);
-            Name = "Paises";
+            Name = "FormPaises";
             Text = "GIT";
             Load += Paises_Load;
             ((System.ComponentModel.ISupportInitialize)numImpuestosPais).EndInit();
@@ -183,5 +196,6 @@
         private Button CLEAN_botton;
         private ListBox lstPaises;
         private NumericUpDown numImpuestosPais;
+        private Label labbel_tabla;
     }
 }
