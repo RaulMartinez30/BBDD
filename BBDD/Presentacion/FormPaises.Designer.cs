@@ -87,7 +87,6 @@
             label3.Size = new Size(39, 22);
             label3.TabIndex = 4;
             label3.Text = "Tax: ";
-            label3.Click += label3_Click;
             // 
             // ADD_botton
             // 
@@ -145,7 +144,6 @@
             numImpuestosPais.Name = "numImpuestosPais";
             numImpuestosPais.Size = new Size(182, 27);
             numImpuestosPais.TabIndex = 11;
-            numImpuestosPais.ValueChanged += numNamePais_ValueChanged;
             // 
             // labbel_tabla
             // 

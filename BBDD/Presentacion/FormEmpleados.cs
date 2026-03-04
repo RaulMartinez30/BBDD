@@ -16,41 +16,130 @@ namespace BBDD.Presentacion
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void FormEmpleados_Load(object sender, EventArgs e)
         {
+            Empleados aux = new Empleados();
             try
             {
-                // 1. Instanciamos Pais para usar su lógica
-                Pais p = new Pais();
+                List<Empleados> employee = aux.ReadAllEmpleados();
 
-                // 2. Traemos la lista de la BBDD (la misma que usas en FormPaises)
-                List<Pais> lista = p.ReadAllPaises();
+                foreach (Empleados employment in employee)
+                {
+                    lstEmpleados.Items.Add(employee);
 
-                // 3. Limpiamos y cargamos el ComboBox
-                cmbPaises.DataSource = lista;
+                }
+                UPDATE_botton.Enabled = false;
+                DELETE_botton.Enabled = false;
 
-                // AQUÍ VIENE LO IMPORTANTE (Razonamiento crítico):
-                cmbPaises.DisplayMember = "Name"; // Lo que el usuario VE (el nombre del país)
-                cmbPaises.ValueMember = "Id";     // Lo que la APP USA (el código como 'ES')
+                txtIDEmpleado.Enabled = false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando países: " + ex.Message);
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CLEAN_botton_Click(object sender, EventArgs e)
+        {
+            txtIDEmpleado.Text = string.Empty;
+            txtNameEmpleado.Text = string.Empty;
+            txtIBANEmpleado.Text = string.Empty;
+            ADD_botton.Enabled = true;
+            DELETE_botton.Enabled = false;
+            lstEmpleados.ClearSelected();
+        }
+
+        private void ADD_botton_Click(object sender, EventArgs e)
+        {
+            if (txtNameEmpleado.Text != string.Empty)
+            {
+                string id = getId(txtNameEmpleado.Text);
+                Pais e = new Empleados(id);
+                e.Name = txtNameEmpleado.Text;
+                e.IBAN = txtIBANEmpleado.Text;
+                e.Pais = (Pais) cmbPaises.SelectedItem;
+                try
+                {
+                    if (e.InsertEmpleado() == 1)
+                    {
+                        lstEmpleados.Items.Add(e);
+                        CLEAN_botton.PerformClick();
+                    }
+                    else
+                    {
+                        MessageBox.Show("INSERT return != 1", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private string getId(string name)
         {
+            string idBase = name.Substring(0, 2).ToUpper();
+            string id = idBase;
+            bool found = false;
+            for (int i = 2; i < name.Length && !found; i++)
+            {
+                id = idBase + name.Substring(i, 1).ToUpper();
+                Empleados eAux = new Empleados();
+                if (!eAux.CheckIfIdExists(id))
+                {
+                    found = true;
 
+                }
+            }
+            return id;
         }
 
-        private void lstEmpleados_SelectedIndexChanged(object sender, EventArgs e)
+        private void UPDATE_botton_Click(object sender, EventArgs e)
         {
+            if (txtIDEmpleado.Text != string.Empty && txtNameEmpleado.Text != string.Empty)
+            {
+
+                Empleados e = new Empleados(txtIDEmpleado.Text);
+                e.Name = txtNameEmpleado.Text;
+                e.IBAN = txtIDEmpleado.Text;
+                try
+                {
+                    int val = e.UpdatePais();
+                    if (val == 1)
+                    {
+                        int index = lstEmpleados.SelectedIndex;
+                        lstEmpleados.Items.RemoveAt(index);
+                        lstEmpleados.Items.Insert(index, e);
+                        CLEAN_botton.PerformClick();
+                    }
+                    else
+                    {
+                        MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (lstEmpleados.SelectedItem != null)
+            {
+                Empleados employee = (Empleados)lstEmpleados.SelectedItem;
+                txtIDEmpleado.Text = employee.Id;
+                txtNameEmpleado.Text = employee.Name;
+                txtIBANEmpleado.Text = employee.IBAN;
+                cmbPaises.SelectedItem = employee.Pais;
+                DELETE_botton.Enabled = true;
+                UPDATE_botton.Enabled = true;
+                ADD_botton.Enabled = false;
+
+            }
 
         }
     }

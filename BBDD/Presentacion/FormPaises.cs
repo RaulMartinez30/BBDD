@@ -49,16 +49,6 @@ namespace BBDD.Presentacion
             }
         }
 
-        private void ID_label_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CLEAN_botton_Click(object sender, EventArgs e)
         {
             txtIDPais.Text = string.Empty;
@@ -96,10 +86,6 @@ namespace BBDD.Presentacion
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private string getId(string name)
         {
             string idBase = name.Substring(0, 2).ToUpper();
@@ -190,11 +176,6 @@ namespace BBDD.Presentacion
                 }
 
             }
-        }
-
-        private void numNamePais_ValueChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
