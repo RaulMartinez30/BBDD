@@ -18,20 +18,29 @@ namespace BBDD.Presentacion
 
         private void FormEmpleados_Load(object sender, EventArgs e)
         {
-            Empleados aux = new Empleados();
             try
             {
-                List<Empleados> employee = aux.ReadAllEmpleados();
+                Empleado aux = new Empleado();
+                List<Empleado> employee = aux.ReadAllEmpleados();
 
-                foreach (Empleados employment in employee)
+                foreach (Empleado employment in employee)
                 {
-                    lstEmpleados.Items.Add(employee);
-
+                    lstEmpleados.Items.Add(employment);
                 }
+
                 UPDATE_botton.Enabled = false;
                 DELETE_botton.Enabled = false;
-
                 txtIDEmpleado.Enabled = false;
+
+                Pais p = new Pais();
+                List<Pais> listaPaises = p.ReadAllPaises();
+
+                cmbPaises.DataSource = listaPaises;
+
+                cmbPaises.DisplayMember = "Name";
+
+                cmbPaises.ValueMember = "Id";
+
             }
             catch (Exception ex)
             {
@@ -52,16 +61,16 @@ namespace BBDD.Presentacion
         {
             if (txtNameEmpleado.Text != string.Empty)
             {
-                string id = getId(txtNameEmpleado.Text);
-                Pais e = new Empleados(id);
-                e.Name = txtNameEmpleado.Text;
-                e.IBAN = txtIBANEmpleado.Text;
-                e.Pais = (Pais) cmbPaises.SelectedItem;
+                string id = getId();
+                Empleado emp = new Empleado(int.Parse(id));
+                emp.Name = txtNameEmpleado.Text;
+                emp.IBAN = txtIBANEmpleado.Text;
+                emp.pais = (Pais)cmbPaises.SelectedItem;
                 try
                 {
-                    if (e.InsertEmpleado() == 1)
+                    if (emp.InsertEmpleado() == 1)
                     {
-                        lstEmpleados.Items.Add(e);
+                        lstEmpleados.Items.Add(emp);
                         CLEAN_botton.PerformClick();
                     }
                     else
@@ -76,19 +85,24 @@ namespace BBDD.Presentacion
             }
         }
 
-        private string getId(string name)
+        private string getId()
         {
-            string idBase = name.Substring(0, 2).ToUpper();
-            string id = idBase;
+            int contador = 1;
             bool found = false;
-            for (int i = 2; i < name.Length && !found; i++)
+            string id = "";
+
+            while (!found)
             {
-                id = idBase + name.Substring(i, 1).ToUpper();
-                Empleados eAux = new Empleados();
+                id = contador.ToString();
+                Empleado eAux = new Empleado();
+
                 if (!eAux.CheckIfIdExists(id))
                 {
                     found = true;
-
+                }
+                else
+                {
+                    contador++;
                 }
             }
             return id;
@@ -99,17 +113,18 @@ namespace BBDD.Presentacion
             if (txtIDEmpleado.Text != string.Empty && txtNameEmpleado.Text != string.Empty)
             {
 
-                Empleados e = new Empleados(txtIDEmpleado.Text);
-                e.Name = txtNameEmpleado.Text;
-                e.IBAN = txtIDEmpleado.Text;
+                Empleado emp = new Empleado(int.Parse(txtIDEmpleado.Text));
+                emp.Name = txtNameEmpleado.Text;
+                emp.IBAN = txtIBANEmpleado.Text;
+                emp.pais = (Pais)cmbPaises.SelectedItem;
                 try
                 {
-                    int val = e.UpdatePais();
+                    int val = emp.UpdateEmpleado();
                     if (val == 1)
                     {
                         int index = lstEmpleados.SelectedIndex;
                         lstEmpleados.Items.RemoveAt(index);
-                        lstEmpleados.Items.Insert(index, e);
+                        lstEmpleados.Items.Insert(index, emp);
                         CLEAN_botton.PerformClick();
                     }
                     else
@@ -125,16 +140,16 @@ namespace BBDD.Presentacion
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             if (lstEmpleados.SelectedItem != null)
             {
-                Empleados employee = (Empleados)lstEmpleados.SelectedItem;
-                txtIDEmpleado.Text = employee.Id;
+                Empleado employee = (Empleado)lstEmpleados.SelectedItem;
+                txtIDEmpleado.Text = employee.Id.ToString();
                 txtNameEmpleado.Text = employee.Name;
                 txtIBANEmpleado.Text = employee.IBAN;
-                cmbPaises.SelectedItem = employee.Pais;
+                cmbPaises.SelectedItem = employee.pais;
                 DELETE_botton.Enabled = true;
                 UPDATE_botton.Enabled = true;
                 ADD_botton.Enabled = false;
@@ -142,5 +157,33 @@ namespace BBDD.Presentacion
             }
 
         }
+
+        private void DELETE_botton_Click(object sender, EventArgs e)
+        {
+            Empleado c = new Empleado(int.Parse(txtIDEmpleado.Text));
+            if (txtIDEmpleado.Text != string.Empty)
+            {
+                try
+                {
+                    int val = c.DeleteEmpleado();
+                    if (val == 1)
+                    {
+                        lstEmpleados.Items.RemoveAt(lstEmpleados.SelectedIndex);
+                        CLEAN_botton.PerformClick();
+                    }
+                    else
+                    {
+                        MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
     }
 }
