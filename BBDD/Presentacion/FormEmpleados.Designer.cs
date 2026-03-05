@@ -51,6 +51,7 @@
             lstEmpleados.Name = "lstEmpleados";
             lstEmpleados.Size = new Size(319, 344);
             lstEmpleados.TabIndex = 21;
+            lstEmpleados.SelectedIndexChanged += lstEmpleados_SelectedIndexChanged;
             // 
             // CLEAN_botton
             // 
@@ -70,6 +71,7 @@
             DELETE_botton.TabIndex = 19;
             DELETE_botton.Text = "DELETE";
             DELETE_botton.UseVisualStyleBackColor = true;
+            DELETE_botton.Click += DELETE_botton_Click;
             // 
             // UPDATE_botton
             // 
