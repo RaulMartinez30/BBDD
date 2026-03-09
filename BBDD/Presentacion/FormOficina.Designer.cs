@@ -83,7 +83,7 @@
             CLEAN_botton.Name = "CLEAN_botton";
             CLEAN_botton.Size = new Size(94, 29);
             CLEAN_botton.TabIndex = 21;
-            CLEAN_botton.Text = "CLEAN";
+            CLEAN_botton.Text = "LIMPIAR";
             CLEAN_botton.UseVisualStyleBackColor = true;
             CLEAN_botton.Click += CLEAN_botton_Click;
             // 
@@ -93,7 +93,7 @@
             DELETE_botton.Name = "DELETE_botton";
             DELETE_botton.Size = new Size(94, 29);
             DELETE_botton.TabIndex = 20;
-            DELETE_botton.Text = "DELETE";
+            DELETE_botton.Text = "ELIMINAR";
             DELETE_botton.UseVisualStyleBackColor = true;
             DELETE_botton.Click += DELETE_botton_Click;
             // 
@@ -101,9 +101,9 @@
             // 
             UPDATE_botton.Location = new Point(596, 295);
             UPDATE_botton.Name = "UPDATE_botton";
-            UPDATE_botton.Size = new Size(94, 29);
+            UPDATE_botton.Size = new Size(107, 29);
             UPDATE_botton.TabIndex = 19;
-            UPDATE_botton.Text = "UPDATE";
+            UPDATE_botton.Text = "ACTUALIZAR";
             UPDATE_botton.UseVisualStyleBackColor = true;
             UPDATE_botton.Click += UPDATE_botton_Click;
             // 
@@ -113,7 +113,7 @@
             ADD_botton.Name = "ADD_botton";
             ADD_botton.Size = new Size(94, 29);
             ADD_botton.TabIndex = 18;
-            ADD_botton.Text = "ADD";
+            ADD_botton.Text = "AÑADIR";
             ADD_botton.UseVisualStyleBackColor = true;
             ADD_botton.Click += ADD_botton_Click;
             // 
@@ -121,7 +121,7 @@
             // 
             label3.AutoSize = true;
             label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Location = new Point(437, 239);
+            label3.Location = new Point(432, 239);
             label3.Name = "label3";
             label3.Size = new Size(51, 22);
             label3.TabIndex = 17;
@@ -151,7 +151,7 @@
             label1.AccessibleName = "ID";
             label1.AutoSize = true;
             label1.BorderStyle = BorderStyle.FixedSingle;
-            label1.Location = new Point(447, 58);
+            label1.Location = new Point(454, 55);
             label1.Name = "label1";
             label1.Size = new Size(29, 22);
             label1.TabIndex = 14;
@@ -178,7 +178,7 @@
             // 
             Pais_labbel.AutoSize = true;
             Pais_labbel.BorderStyle = BorderStyle.FixedSingle;
-            Pais_labbel.Location = new Point(440, 103);
+            Pais_labbel.Location = new Point(447, 103);
             Pais_labbel.Name = "Pais_labbel";
             Pais_labbel.Size = new Size(36, 22);
             Pais_labbel.TabIndex = 26;
@@ -189,7 +189,7 @@
             // 
             label4.AutoSize = true;
             label4.BorderStyle = BorderStyle.FixedSingle;
-            label4.Location = new Point(422, 194);
+            label4.Location = new Point(406, 196);
             label4.Name = "label4";
             label4.Size = new Size(77, 22);
             label4.TabIndex = 29;

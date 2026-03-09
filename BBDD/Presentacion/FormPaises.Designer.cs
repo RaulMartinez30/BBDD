@@ -65,11 +65,11 @@
             // 
             label2.AutoSize = true;
             label2.BorderStyle = BorderStyle.FixedSingle;
-            label2.Location = new Point(416, 107);
+            label2.Location = new Point(404, 107);
             label2.Name = "label2";
-            label2.Size = new Size(54, 22);
+            label2.Size = new Size(69, 22);
             label2.TabIndex = 3;
-            label2.Text = "Name:";
+            label2.Text = "Nombre:";
             // 
             // txtNamePais
             // 
@@ -82,49 +82,49 @@
             // 
             label3.AutoSize = true;
             label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Location = new Point(431, 165);
+            label3.Location = new Point(391, 167);
             label3.Name = "label3";
-            label3.Size = new Size(39, 22);
+            label3.Size = new Size(82, 22);
             label3.TabIndex = 4;
-            label3.Text = "Tax: ";
+            label3.Text = "Impuestos:";
             // 
             // ADD_botton
             // 
-            ADD_botton.Location = new Point(452, 264);
+            ADD_botton.Location = new Point(419, 264);
             ADD_botton.Name = "ADD_botton";
-            ADD_botton.Size = new Size(94, 29);
+            ADD_botton.Size = new Size(103, 29);
             ADD_botton.TabIndex = 5;
-            ADD_botton.Text = "ADD";
+            ADD_botton.Text = "AÑADIR";
             ADD_botton.UseVisualStyleBackColor = true;
             ADD_botton.Click += ADD_botton_Click;
             // 
             // UPDATE_botton
             // 
-            UPDATE_botton.Location = new Point(600, 264);
+            UPDATE_botton.Location = new Point(562, 264);
             UPDATE_botton.Name = "UPDATE_botton";
-            UPDATE_botton.Size = new Size(94, 29);
+            UPDATE_botton.Size = new Size(108, 29);
             UPDATE_botton.TabIndex = 6;
-            UPDATE_botton.Text = "UPDATE";
+            UPDATE_botton.Text = "ACTUALIZAR";
             UPDATE_botton.UseVisualStyleBackColor = true;
             UPDATE_botton.Click += UPDATE_botton_Click;
             // 
             // DELETE_botton
             // 
-            DELETE_botton.Location = new Point(452, 323);
+            DELETE_botton.Location = new Point(428, 323);
             DELETE_botton.Name = "DELETE_botton";
             DELETE_botton.Size = new Size(94, 29);
             DELETE_botton.TabIndex = 8;
-            DELETE_botton.Text = "DELETE";
+            DELETE_botton.Text = "ELIMINAR";
             DELETE_botton.UseVisualStyleBackColor = true;
             DELETE_botton.Click += DELETE_botton_Click;
             // 
             // CLEAN_botton
             // 
-            CLEAN_botton.Location = new Point(600, 323);
+            CLEAN_botton.Location = new Point(576, 323);
             CLEAN_botton.Name = "CLEAN_botton";
             CLEAN_botton.Size = new Size(94, 29);
             CLEAN_botton.TabIndex = 9;
-            CLEAN_botton.Text = "CLEAN";
+            CLEAN_botton.Text = "LIMPIAR";
             CLEAN_botton.UseVisualStyleBackColor = true;
             CLEAN_botton.Click += CLEAN_botton_Click;
             // 
