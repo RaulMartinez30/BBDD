@@ -161,29 +161,35 @@ namespace BBDD.Presentacion
         private void DELETE_botton_Click(object sender, EventArgs e)
         {
             Empleado c = new Empleado(int.Parse(txtIDEmpleado.Text));
-            if (txtIDEmpleado.Text != string.Empty)
+
+            if (MessageBox.Show("¿Realmente quieres borrar este elemento " + c.Id + "?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                try
+                if (txtIDEmpleado.Text != string.Empty)
                 {
-                    int val = c.DeleteEmpleado();
-                    if (val == 1)
+
+                    try
                     {
-                        lstEmpleados.Items.RemoveAt(lstEmpleados.SelectedIndex);
-                        CLEAN_botton.PerformClick();
+                        int val = c.DeleteEmpleado();
+                        if (val == 1)
+                        {
+                            lstEmpleados.Items.RemoveAt(lstEmpleados.SelectedIndex);
+                            CLEAN_botton.PerformClick();
+                        }
+                        else
+                        {
+                            MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
             }
         }
+
 
     }
 }
