@@ -68,6 +68,15 @@ namespace BBDD.Presentacion
                     CargarFormEnTab(f, Posicion);
                 }
             }
+            // --- Lógica para NOMINAS ---
+            else if (TablaControlForm.SelectedTab == Nominas)
+            {
+                if (Nominas.Controls.Count == 0)
+                {
+                    FormNominas f = new FormNominas();
+                    CargarFormEnTab(f, Nominas);
+                }
+            }
         }
 
         // Método auxiliar para no escribir lo mismo 4 veces (Limpieza nivel pro)
