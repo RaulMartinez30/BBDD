@@ -31,9 +31,13 @@ namespace BBDD.Presentacion
 
         private void Pais_labbel_Click(object sender, EventArgs e)
         {
-
+            
         }
 
+        private void cmbPaises_TextUpdate(object sender, EventArgs e)
+        {
+            cargarPaises();
+        }
 
 
         private void txtIDOficina_TextChanged(object sender, EventArgs e) // Id de la oficina
@@ -66,7 +70,8 @@ namespace BBDD.Presentacion
         }
 
         private void cmbPaises_SelectedIndexChanged(object sender, EventArgs e) // Desplegable paises
-        { 
+        {
+           
 
         }
 
@@ -172,7 +177,7 @@ namespace BBDD.Presentacion
 
         }
 
-        private void FormOficina_Load(object sender, EventArgs e)
+        public void FormOficina_Load(object sender, EventArgs e)
         {
             cargarOficinas();
             cargarPaises();

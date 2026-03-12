@@ -173,6 +173,7 @@
             cmbPaises.Size = new Size(151, 28);
             cmbPaises.TabIndex = 27;
             cmbPaises.SelectedIndexChanged += cmbPaises_SelectedIndexChanged;
+            cmbPaises.TextUpdate += cmbPaises_TextUpdate;
             // 
             // Pais_labbel
             // 
