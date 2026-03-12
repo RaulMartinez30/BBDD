@@ -176,7 +176,7 @@
             // 
             // ADD_botton
             // 
-            ADD_botton.Location = new Point(420, 350); // Subido de 360 a 350
+            ADD_botton.Location = new Point(420, 350); 
             ADD_botton.Name = "ADD_botton";
             ADD_botton.Size = new Size(100, 29);
             ADD_botton.Text = "AÑADIR";
@@ -184,7 +184,7 @@
             // 
             // UPDATE_botton
             // 
-            UPDATE_botton.Location = new Point(570, 350); // Subido de 360 a 350
+            UPDATE_botton.Location = new Point(570, 350); 
             UPDATE_botton.Name = "UPDATE_botton";
             UPDATE_botton.Size = new Size(110, 29);
             UPDATE_botton.Text = "ACTUALIZAR";
@@ -192,7 +192,7 @@
             // 
             // DELETE_botton
             // 
-            DELETE_botton.Location = new Point(420, 390); // Subido de 400 a 390
+            DELETE_botton.Location = new Point(420, 390); 
             DELETE_botton.Name = "DELETE_botton";
             DELETE_botton.Size = new Size(100, 29);
             DELETE_botton.Text = "ELIMINAR";
@@ -200,7 +200,7 @@
             // 
             // CLEAN_botton
             // 
-            CLEAN_botton.Location = new Point(570, 390); // Subido de 400 a 390
+            CLEAN_botton.Location = new Point(570, 390); 
             CLEAN_botton.Name = "CLEAN_botton";
             CLEAN_botton.Size = new Size(110, 29);
             CLEAN_botton.Text = "LIMPIAR";
@@ -210,7 +210,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(760, 440); // Ajustado altura de ventana
+            ClientSize = new Size(760, 440); 
             Controls.Add(chkActual);
             Controls.Add(label_fin);
             Controls.Add(dtpEndDate);

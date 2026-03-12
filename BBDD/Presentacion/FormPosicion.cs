@@ -10,80 +10,82 @@ namespace BBDD.Presentacion
         public FormPosicion()
         {
             InitializeComponent();
+
+            cmbEmpleados.DropDown += cmbEmpleados_DropDown;
+            cmbOficinas.DropDown += cmbOficinas_DropDown;
         }
 
         private void FormPosicion_Load(object sender, EventArgs e)
         {
+            txtIDPosicion.Enabled = false;
+            dtpEndDate.Enabled = false;
+
             cargarCombos();
             cargarPosiciones();
-            txtIDPosicion.Enabled = false;
+        }
+
+        // 🔹 Recargar empleados al abrir combo
+        private void cmbEmpleados_DropDown(object sender, EventArgs e)
+        {
+            Empleado emp = new Empleado();
+            cmbEmpleados.DataSource = emp.ReadAllEmpleados();
+            cmbEmpleados.DisplayMember = "Name";
+            cmbEmpleados.ValueMember = "Id";
+        }
+
+        // 🔹 Recargar oficinas al abrir combo
+        private void cmbOficinas_DropDown(object sender, EventArgs e)
+        {
+            Oficina ofi = new Oficina();
+            cmbOficinas.DataSource = ofi.ReadAllOficinas();
+            cmbOficinas.DisplayMember = "NameCiudad";
+            cmbOficinas.ValueMember = "Id";
         }
 
         private void cargarCombos()
         {
-            try
-            {
-                // Cargar Empleados - Usando ReadAllEmpleados() y propiedad Id
-                Empleado emp = new Empleado();
-                List<Empleado> listaEmp = emp.ReadAllEmpleados();
-                cmbEmpleados.DataSource = listaEmp;
-                cmbEmpleados.DisplayMember = "Name";
-                cmbEmpleados.ValueMember = "Id";
+            Empleado emp = new Empleado();
+            cmbEmpleados.DataSource = emp.ReadAllEmpleados();
+            cmbEmpleados.DisplayMember = "Name";
+            cmbEmpleados.ValueMember = "Id";
 
-                // Cargar Oficinas - Usando ReadAllOficinas() y propiedad Id
-                Oficina ofi = new Oficina();
-                List<Oficina> listaOfi = ofi.ReadAllOficinas();
-                cmbOficinas.DataSource = listaOfi;
-                cmbOficinas.DisplayMember = "NameCiudad";
-                cmbOficinas.ValueMember = "Id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cargando combos: " + ex.Message);
-            }
+            Oficina ofi = new Oficina();
+            cmbOficinas.DataSource = ofi.ReadAllOficinas();
+            cmbOficinas.DisplayMember = "NameCiudad";
+            cmbOficinas.ValueMember = "Id";
         }
 
         private void cargarPosiciones()
         {
             lstPosicion.Items.Clear();
+
             Posicion p = new Posicion();
-            try
+            List<Posicion> lista = p.ReadAllPosiciones();
+
+            foreach (Posicion pos in lista)
             {
-                List<Posicion> lista = p.ReadAllPosiciones();
-                foreach (Posicion pos in lista)
-                {
-                    lstPosicion.Items.Add(pos);
-                }
-                UPDATE_botton.Enabled = false;
-                DELETE_botton.Enabled = false;
-                ADD_botton.Enabled = true;
+                lstPosicion.Items.Add(pos);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            ADD_botton.Enabled = true;
+            UPDATE_botton.Enabled = false;
+            DELETE_botton.Enabled = false;
         }
 
         private int getId()
         {
-            int id = 0;
-            bool found = false;
-            Posicion pAux = new Posicion();
-            while (!found)
-            {
+            int id = 1;
+            Posicion p = new Posicion();
+
+            while (p.CheckIfIdExists(id.ToString()))
                 id++;
-                // Usamos id.ToString() porque tu dominio pide String en CheckIfIdExists
-                if (!pAux.CheckIfIdExists(id.ToString()))
-                {
-                    found = true;
-                }
-            }
+
             return id;
         }
 
         private void ADD_botton_Click(object sender, EventArgs e)
         {
-            if (txtNamePosicion.Text != string.Empty && cmbEmpleados.SelectedItem != null)
+            if (txtNamePosicion.Text != "" && cmbEmpleados.SelectedItem != null)
             {
                 Posicion p = new Posicion(getId());
                 p.empleado = (Empleado)cmbEmpleados.SelectedItem;
@@ -91,32 +93,23 @@ namespace BBDD.Presentacion
                 p.Name = txtNamePosicion.Text;
                 p.YearSalary = numYearSalary.Value;
                 p.StartDate = dtpStartDate.Value;
-
-                // Si el checkbox está marcado, la fecha fin es null
                 p.EndDate = chkActual.Checked ? (DateTime?)null : dtpEndDate.Value;
 
-                try
+                if (p.InsertPosicion() == 1)
                 {
-                    if (p.InsertPosicion() == 1)
-                    {
-                        cargarPosiciones();
-                        CLEAN_botton.PerformClick();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al insertar la posición.");
-                    }
+                    cargarPosiciones();
+                    CLEAN_botton.PerformClick();
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error al insertar");
                 }
             }
         }
 
         private void UPDATE_botton_Click(object sender, EventArgs e)
         {
-            if (txtIDPosicion.Text != string.Empty)
+            if (txtIDPosicion.Text != "")
             {
                 Posicion p = new Posicion(int.Parse(txtIDPosicion.Text));
                 p.empleado = (Empleado)cmbEmpleados.SelectedItem;
@@ -126,39 +119,27 @@ namespace BBDD.Presentacion
                 p.StartDate = dtpStartDate.Value;
                 p.EndDate = chkActual.Checked ? (DateTime?)null : dtpEndDate.Value;
 
-                try
+                if (p.UpdatePosicion() == 1)
                 {
-                    if (p.UpdatePosicion() == 1)
-                    {
-                        cargarPosiciones();
-                        CLEAN_botton.PerformClick();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    cargarPosiciones();
+                    CLEAN_botton.PerformClick();
                 }
             }
         }
 
         private void DELETE_botton_Click(object sender, EventArgs e)
         {
-            if (txtIDPosicion.Text != string.Empty)
+            if (lstPosicion.SelectedItem != null)
             {
                 Posicion p = (Posicion)lstPosicion.SelectedItem;
-                if (MessageBox.Show("¿Seguro que desea borrar " + p.Name + "?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                if (MessageBox.Show("¿Borrar " + p.Name + "?", "Confirmar",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    try
+                    if (p.DeletePosicion() == 1)
                     {
-                        if (p.DeletePosicion() == 1)
-                        {
-                            cargarPosiciones();
-                            CLEAN_botton.PerformClick();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
+                        cargarPosiciones();
+                        CLEAN_botton.PerformClick();
                     }
                 }
             }
@@ -169,6 +150,7 @@ namespace BBDD.Presentacion
             if (lstPosicion.SelectedItem != null)
             {
                 Posicion p = (Posicion)lstPosicion.SelectedItem;
+
                 txtIDPosicion.Text = p.Id.ToString();
                 txtNamePosicion.Text = p.Name;
                 numYearSalary.Value = p.YearSalary;
@@ -183,10 +165,9 @@ namespace BBDD.Presentacion
                 {
                     chkActual.Checked = false;
                     dtpEndDate.Enabled = true;
-                    dtpEndDate.Value = (DateTime)p.EndDate;
+                    dtpEndDate.Value = p.EndDate.Value;
                 }
 
-                // Sincronizar combos con los IDs de empleado y oficina
                 cmbEmpleados.SelectedValue = p.empleado.Id;
                 cmbOficinas.SelectedValue = p.oficina.Id;
 
@@ -198,9 +179,10 @@ namespace BBDD.Presentacion
 
         private void CLEAN_botton_Click(object sender, EventArgs e)
         {
-            txtIDPosicion.Text = string.Empty;
-            txtNamePosicion.Text = string.Empty;
+            txtIDPosicion.Text = "";
+            txtNamePosicion.Text = "";
             numYearSalary.Value = 0;
+
             chkActual.Checked = true;
             dtpEndDate.Enabled = false;
             dtpStartDate.Value = DateTime.Now;
@@ -208,12 +190,12 @@ namespace BBDD.Presentacion
             ADD_botton.Enabled = true;
             UPDATE_botton.Enabled = false;
             DELETE_botton.Enabled = false;
+
             lstPosicion.ClearSelected();
         }
 
         private void chkActual_CheckedChanged(object sender, EventArgs e)
         {
-            // Si es el puesto actual, deshabilitamos el selector de fecha de fin
             dtpEndDate.Enabled = !chkActual.Checked;
         }
     }
