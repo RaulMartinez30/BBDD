@@ -23,7 +23,7 @@ namespace BBDD.Presentacion
                 int anioSeleccionado = dateTimePicker1.Value.Year;
                 int mesSeleccionado = dateTimePicker1.Value.Month;
 
-                
+
                 DateTime fechaSeleccionada = new DateTime(anioSeleccionado, mesSeleccionado, 1);
                 DateTime fechaActual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
@@ -33,7 +33,7 @@ namespace BBDD.Presentacion
                     return;
                 }
 
-                
+
                 Nominas aux = new Nominas();
                 // Tendrás que crear este método en Nominas.cs
                 if (aux.CheckIfNominaExists(anioSeleccionado, mesSeleccionado))
@@ -58,4 +58,5 @@ namespace BBDD.Presentacion
                 MessageBox.Show(ex.Message, "Error chungo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    }
 }
