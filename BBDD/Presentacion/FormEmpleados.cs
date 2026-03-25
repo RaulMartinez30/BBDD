@@ -16,6 +16,33 @@ namespace BBDD.Presentacion
             InitializeComponent();
         }
 
+        private void cmbPaises_TextUpdate(object sender, EventArgs e)
+        {
+            cargarPaises();
+        }
+
+        private void cargarPaises()
+        {
+            try
+            {
+                Pais p = new Pais();
+
+
+                List<Pais> lista = p.ReadAllPaises();
+
+
+                cmbPaises.DataSource = lista;
+
+
+                cmbPaises.DisplayMember = "Name";
+                cmbPaises.ValueMember = "Id";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error cargando países: " + ex.Message);
+            }
+        }
+
         private void FormEmpleados_Load(object sender, EventArgs e)
         {
             try
@@ -190,6 +217,6 @@ namespace BBDD.Presentacion
             }
         }
 
-
+       
     }
 }

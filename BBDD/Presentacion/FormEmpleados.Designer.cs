@@ -155,6 +155,7 @@
             cmbPaises.Name = "cmbPaises";
             cmbPaises.Size = new Size(151, 28);
             cmbPaises.TabIndex = 25;
+            cmbPaises.TextUpdate += cmbPaises_TextUpdate;
             // 
             // labbel_tabla
             // 
