@@ -33,8 +33,9 @@
             Empleados = new TabPage();
             Oficina = new TabPage();
             Posicion = new TabPage();
-            fileSystemWatcher1 = new FileSystemWatcher();
             Nominas = new TabPage();
+            fileSystemWatcher1 = new FileSystemWatcher();
+            Informes = new TabPage();
             TablaControlForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
@@ -46,6 +47,7 @@
             TablaControlForm.Controls.Add(Oficina);
             TablaControlForm.Controls.Add(Posicion);
             TablaControlForm.Controls.Add(Nominas);
+            TablaControlForm.Controls.Add(Informes);
             TablaControlForm.Location = new Point(1, 2);
             TablaControlForm.Name = "TablaControlForm";
             TablaControlForm.SelectedIndex = 0;
@@ -91,11 +93,6 @@
             Posicion.Text = "Posición";
             Posicion.UseVisualStyleBackColor = true;
             // 
-            // fileSystemWatcher1
-            // 
-            fileSystemWatcher1.EnableRaisingEvents = true;
-            fileSystemWatcher1.SynchronizingObject = this;
-            // 
             // Nominas
             // 
             Nominas.Location = new Point(4, 29);
@@ -104,6 +101,20 @@
             Nominas.TabIndex = 4;
             Nominas.Text = "Nominas";
             Nominas.UseVisualStyleBackColor = true;
+            // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // Informes
+            // 
+            Informes.Location = new Point(4, 29);
+            Informes.Name = "Informes";
+            Informes.Size = new Size(795, 415);
+            Informes.TabIndex = 5;
+            Informes.Text = "Informes";
+            Informes.UseVisualStyleBackColor = true;
             // 
             // FormPrincipal
             // 
@@ -128,5 +139,6 @@
         private FileSystemWatcher fileSystemWatcher1;
         private TabPage Posicion;
         private TabPage Nominas;
+        private TabPage Informes;
     }
 }

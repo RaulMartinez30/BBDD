@@ -77,6 +77,14 @@ namespace BBDD.Presentacion
                     CargarFormEnTab(f, Nominas);
                 }
             }
+            else if (TablaControlForm.SelectedTab == Informes) // Asegurate de que la pestaña se llama Informes en el diseñador
+            {
+                if (Informes.Controls.Count == 0)
+                {
+                    FormInformes f = new FormInformes();
+                    CargarFormEnTab(f, Informes);
+                }
+            }
         }
 
         // Método auxiliar para no escribir lo mismo 4 veces (Limpieza nivel pro)
@@ -88,5 +96,7 @@ namespace BBDD.Presentacion
             pestañaDestino.Controls.Add(formularioHijo);
             formularioHijo.Show();
         }
+
+
     }
 }
