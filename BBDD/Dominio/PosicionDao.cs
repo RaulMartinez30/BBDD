@@ -39,9 +39,16 @@ namespace BBDD.Dominio
 
         public int Insert(Posicion p)
         {
-            string endDateSql = p.EndDate == null
-                ? "NULL"
-                : "'" + p.EndDate.Value.ToString("yyyy-MM-dd") + "'";
+            string endDateSql;
+            if (p.EndDate == null)
+            {
+                endDateSql = "NULL";
+            }
+            else
+            {
+                // Si no es null, le ponemos las comillas
+                endDateSql = "'" + p.EndDate.Value.ToString("yyyy-MM-dd") + "'";
+            }
 
             string sql = "INSERT INTO positions VALUES (" +
                          p.Id + ", " +
@@ -57,9 +64,16 @@ namespace BBDD.Dominio
 
         public int Update(Posicion p)
         {
-            string endDateSql = p.EndDate == null
-                ? "NULL"
-                : "'" + p.EndDate.Value.ToString("yyyy-MM-dd") + "'";
+            string endDateSql;
+            if (p.EndDate == null)
+            {
+                endDateSql = "NULL";
+            }
+            else
+            {
+                // Si hay fecha, le metemos el formato
+                endDateSql = "'" + p.EndDate.Value.ToString("yyyy-MM-dd") + "'";
+            }
 
             string sql = "UPDATE positions SET " +
                          "posEmployee = " + p.empleado.Id + ", " +
