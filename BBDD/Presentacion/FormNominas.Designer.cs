@@ -36,6 +36,7 @@
             // button1
             // 
             button1.BackColor = Color.Orange;
+            button1.Cursor = Cursors.Hand;
             button1.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.Location = new Point(319, 267);
             button1.Name = "button1";

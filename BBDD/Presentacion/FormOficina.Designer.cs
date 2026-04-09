@@ -79,42 +79,54 @@
             // 
             // CLEAN_botton
             // 
+            CLEAN_botton.BackColor = Color.LightGoldenrodYellow;
+            CLEAN_botton.Cursor = Cursors.Hand;
+            CLEAN_botton.FlatStyle = FlatStyle.Popup;
             CLEAN_botton.Location = new Point(596, 354);
             CLEAN_botton.Name = "CLEAN_botton";
-            CLEAN_botton.Size = new Size(94, 29);
+            CLEAN_botton.Size = new Size(107, 29);
             CLEAN_botton.TabIndex = 21;
             CLEAN_botton.Text = "LIMPIAR";
-            CLEAN_botton.UseVisualStyleBackColor = true;
+            CLEAN_botton.UseVisualStyleBackColor = false;
             CLEAN_botton.Click += CLEAN_botton_Click;
             // 
             // DELETE_botton
             // 
+            DELETE_botton.BackColor = Color.LightCoral;
+            DELETE_botton.Cursor = Cursors.Hand;
+            DELETE_botton.FlatStyle = FlatStyle.Popup;
             DELETE_botton.Location = new Point(448, 354);
             DELETE_botton.Name = "DELETE_botton";
             DELETE_botton.Size = new Size(94, 29);
             DELETE_botton.TabIndex = 20;
             DELETE_botton.Text = "ELIMINAR";
-            DELETE_botton.UseVisualStyleBackColor = true;
+            DELETE_botton.UseVisualStyleBackColor = false;
             DELETE_botton.Click += DELETE_botton_Click;
             // 
             // UPDATE_botton
             // 
+            UPDATE_botton.BackColor = Color.Turquoise;
+            UPDATE_botton.Cursor = Cursors.Hand;
+            UPDATE_botton.FlatStyle = FlatStyle.Popup;
             UPDATE_botton.Location = new Point(596, 295);
             UPDATE_botton.Name = "UPDATE_botton";
             UPDATE_botton.Size = new Size(107, 29);
             UPDATE_botton.TabIndex = 19;
             UPDATE_botton.Text = "ACTUALIZAR";
-            UPDATE_botton.UseVisualStyleBackColor = true;
+            UPDATE_botton.UseVisualStyleBackColor = false;
             UPDATE_botton.Click += UPDATE_botton_Click;
             // 
             // ADD_botton
             // 
+            ADD_botton.BackColor = Color.MediumSeaGreen;
+            ADD_botton.Cursor = Cursors.Hand;
+            ADD_botton.FlatStyle = FlatStyle.Popup;
             ADD_botton.Location = new Point(448, 295);
             ADD_botton.Name = "ADD_botton";
             ADD_botton.Size = new Size(94, 29);
             ADD_botton.TabIndex = 18;
             ADD_botton.Text = "AÑADIR";
-            ADD_botton.UseVisualStyleBackColor = true;
+            ADD_botton.UseVisualStyleBackColor = false;
             ADD_botton.Click += ADD_botton_Click;
             // 
             // label3

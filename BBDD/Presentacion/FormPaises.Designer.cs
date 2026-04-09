@@ -90,42 +90,57 @@
             // 
             // ADD_botton
             // 
-            ADD_botton.Location = new Point(419, 264);
+            ADD_botton.BackColor = Color.MediumSeaGreen;
+            ADD_botton.Cursor = Cursors.Hand;
+            ADD_botton.FlatStyle = FlatStyle.Popup;
+            ADD_botton.Location = new Point(404, 264);
             ADD_botton.Name = "ADD_botton";
-            ADD_botton.Size = new Size(103, 29);
+            ADD_botton.Size = new Size(118, 29);
             ADD_botton.TabIndex = 5;
             ADD_botton.Text = "AÑADIR";
-            ADD_botton.UseVisualStyleBackColor = true;
+            ADD_botton.UseVisualStyleBackColor = false;
             ADD_botton.Click += ADD_botton_Click;
             // 
             // UPDATE_botton
             // 
+            UPDATE_botton.BackColor = Color.Turquoise;
+            UPDATE_botton.BackgroundImageLayout = ImageLayout.Stretch;
+            UPDATE_botton.Cursor = Cursors.Hand;
+            UPDATE_botton.FlatStyle = FlatStyle.Popup;
+            UPDATE_botton.ForeColor = SystemColors.ActiveCaptionText;
             UPDATE_botton.Location = new Point(562, 264);
             UPDATE_botton.Name = "UPDATE_botton";
             UPDATE_botton.Size = new Size(108, 29);
             UPDATE_botton.TabIndex = 6;
             UPDATE_botton.Text = "ACTUALIZAR";
-            UPDATE_botton.UseVisualStyleBackColor = true;
+            UPDATE_botton.UseVisualStyleBackColor = false;
             UPDATE_botton.Click += UPDATE_botton_Click;
             // 
             // DELETE_botton
             // 
-            DELETE_botton.Location = new Point(428, 323);
+            DELETE_botton.BackColor = Color.LightCoral;
+            DELETE_botton.Cursor = Cursors.Hand;
+            DELETE_botton.FlatStyle = FlatStyle.Popup;
+            DELETE_botton.ForeColor = SystemColors.ActiveCaptionText;
+            DELETE_botton.Location = new Point(404, 323);
             DELETE_botton.Name = "DELETE_botton";
-            DELETE_botton.Size = new Size(94, 29);
+            DELETE_botton.Size = new Size(118, 29);
             DELETE_botton.TabIndex = 8;
             DELETE_botton.Text = "ELIMINAR";
-            DELETE_botton.UseVisualStyleBackColor = true;
+            DELETE_botton.UseVisualStyleBackColor = false;
             DELETE_botton.Click += DELETE_botton_Click;
             // 
             // CLEAN_botton
             // 
-            CLEAN_botton.Location = new Point(576, 323);
+            CLEAN_botton.BackColor = Color.LightGoldenrodYellow;
+            CLEAN_botton.Cursor = Cursors.Hand;
+            CLEAN_botton.FlatStyle = FlatStyle.Popup;
+            CLEAN_botton.Location = new Point(562, 323);
             CLEAN_botton.Name = "CLEAN_botton";
-            CLEAN_botton.Size = new Size(94, 29);
+            CLEAN_botton.Size = new Size(108, 29);
             CLEAN_botton.TabIndex = 9;
             CLEAN_botton.Text = "LIMPIAR";
-            CLEAN_botton.UseVisualStyleBackColor = true;
+            CLEAN_botton.UseVisualStyleBackColor = false;
             CLEAN_botton.Click += CLEAN_botton_Click;
             // 
             // lstPaises
@@ -139,7 +154,9 @@
             // 
             // numImpuestosPais
             // 
+            numImpuestosPais.BackColor = SystemColors.HighlightText;
             numImpuestosPais.DecimalPlaces = 2;
+            numImpuestosPais.ForeColor = SystemColors.Desktop;
             numImpuestosPais.Location = new Point(502, 165);
             numImpuestosPais.Name = "numImpuestosPais";
             numImpuestosPais.Size = new Size(182, 27);

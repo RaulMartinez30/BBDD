@@ -108,12 +108,14 @@
             // 
             // btnGenerar
             // 
+            btnGenerar.BackColor = Color.MediumSeaGreen;
+            btnGenerar.Cursor = Cursors.Hand;
             btnGenerar.Location = new Point(620, 52);
             btnGenerar.Name = "btnGenerar";
             btnGenerar.Size = new Size(150, 32);
             btnGenerar.TabIndex = 4;
             btnGenerar.Text = "Generar informe";
-            btnGenerar.UseVisualStyleBackColor = true;
+            btnGenerar.UseVisualStyleBackColor = false;
             btnGenerar.Click += btnGenerar_Click;
             // 
             // dgvResultados
