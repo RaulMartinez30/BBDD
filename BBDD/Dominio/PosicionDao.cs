@@ -12,13 +12,16 @@ namespace BBDD.Dominio
         public List<Posicion> ReadAll()
         {
             List<Posicion> resultado = new List<Posicion>();
-            string sql = "SELECT * FROM positions";
+            string sql = "SELECT p.*, e.empName FROM positions p JOIN employees e ON p.posEmployee = e.idEmployee";
             List<string[]> data = AgenteBD.GetInstance().Read(sql);
 
             foreach (string[] row in data)
             {
                 Posicion p = new Posicion(int.Parse(row[0]));
                 p.empleado = new Empleado(int.Parse(row[1]));
+
+                p.empleado.Name = row[7];
+
                 p.oficina = new Oficina(int.Parse(row[2]));
                 p.Name = row[3];
                 p.YearSalary = Convert.ToDecimal(row[4]);
@@ -31,7 +34,6 @@ namespace BBDD.Dominio
 
                 resultado.Add(p);
             }
-
             return resultado;
         }
 
@@ -63,7 +65,7 @@ namespace BBDD.Dominio
                          "posEmployee = " + p.empleado.Id + ", " +
                          "posOffice = " + p.oficina.Id + ", " +
                          "posName = '" + p.Name + "', " +
-                         "posYearSalary = " + p.YearSalary + ", " +
+                         "posYearSalary = " + p.YearSalary.ToString().Replace(",", ".") + ", " +
                          "posStartDate = '" + p.StartDate.ToString("yyyy-MM-dd") + "', " +
                          "posEndDate = " + endDateSql +
                          " WHERE idPosition = " + p.Id;

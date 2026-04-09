@@ -95,14 +95,20 @@ namespace BBDD.Presentacion
                 p.StartDate = dtpStartDate.Value;
                 p.EndDate = chkActual.Checked ? (DateTime?)null : dtpEndDate.Value;
 
-                if (p.InsertPosicion() == 1)
+                try
                 {
-                    cargarPosiciones();
-                    CLEAN_botton.PerformClick();
-                }
-                else
+                    if (p.InsertPosicion() == 1)
+                    {
+                        cargarPosiciones();
+                        CLEAN_botton.PerformClick();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al insertar");
+                    }
+                } catch (Exception ex)
                 {
-                    MessageBox.Show("Error al insertar");
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -119,10 +125,16 @@ namespace BBDD.Presentacion
                 p.StartDate = dtpStartDate.Value;
                 p.EndDate = chkActual.Checked ? (DateTime?)null : dtpEndDate.Value;
 
-                if (p.UpdatePosicion() == 1)
+                try
                 {
-                    cargarPosiciones();
-                    CLEAN_botton.PerformClick();
+                    if (p.UpdatePosicion() == 1)
+                    {
+                        cargarPosiciones();
+                        CLEAN_botton.PerformClick();
+                    }
+                } catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -136,10 +148,16 @@ namespace BBDD.Presentacion
                 if (MessageBox.Show("¿Borrar " + p.Name + "?", "Confirmar",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (p.DeletePosicion() == 1)
+                    try
                     {
-                        cargarPosiciones();
-                        CLEAN_botton.PerformClick();
+                        if (p.DeletePosicion() == 1)
+                        {
+                            cargarPosiciones();
+                            CLEAN_botton.PerformClick();
+                        }
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

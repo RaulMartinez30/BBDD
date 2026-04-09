@@ -67,7 +67,7 @@ namespace BBDD.Dominio
 
         public override string ToString()
         {
-            return Id + " - " + Name;
+            return Id + " - " + Name + " - " + empleado.Name;
         }
     }
 }

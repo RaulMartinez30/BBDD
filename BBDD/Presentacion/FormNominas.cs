@@ -29,7 +29,7 @@ namespace BBDD.Presentacion
 
                 if (fechaSeleccionada >= fechaActual)
                 {
-                    MessageBox.Show("Bro, el mes seleccionado tiene que ser en el pasado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El mes seleccionado tiene que ser en el pasado al actual seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -46,17 +46,22 @@ namespace BBDD.Presentacion
 
                 if (generadas > 0)
                 {
-                    MessageBox.Show($"¡Se han generado {generadas} nóminas de locos para la fecha {mesSeleccionado}/{anioSeleccionado}!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"¡Se han generado {generadas} nóminas para la fecha {mesSeleccionado}/{anioSeleccionado}!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Nadie ha currado este mes, no se generó ninguna nómina.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Nadie a trabajado el mes seleccionado, no se generó ninguna nómina.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error chungo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

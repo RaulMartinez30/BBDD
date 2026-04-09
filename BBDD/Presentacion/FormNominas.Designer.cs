@@ -28,36 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labbel_tabla = new Label();
-            lstNominas = new ListBox();
             button1 = new Button();
             dateTimePicker1 = new DateTimePicker();
+            label1 = new Label();
             SuspendLayout();
-            // 
-            // labbel_tabla
-            // 
-            labbel_tabla.AccessibleName = "ID";
-            labbel_tabla.AutoSize = true;
-            labbel_tabla.BorderStyle = BorderStyle.FixedSingle;
-            labbel_tabla.Location = new Point(51, 37);
-            labbel_tabla.Name = "labbel_tabla";
-            labbel_tabla.Size = new Size(73, 22);
-            labbel_tabla.TabIndex = 40;
-            labbel_tabla.Text = "Nominas:";
-            // 
-            // lstNominas
-            // 
-            lstNominas.FormattingEnabled = true;
-            lstNominas.Location = new Point(51, 62);
-            lstNominas.Name = "lstNominas";
-            lstNominas.Size = new Size(319, 344);
-            lstNominas.TabIndex = 37;
             // 
             // button1
             // 
             button1.BackColor = Color.Orange;
             button1.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(476, 235);
+            button1.Location = new Point(319, 267);
             button1.Name = "button1";
             button1.Size = new Size(199, 57);
             button1.TabIndex = 41;
@@ -67,20 +47,30 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(423, 137);
+            dateTimePicker1.Location = new Point(284, 168);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(335, 27);
+            dateTimePicker1.Size = new Size(277, 27);
             dateTimePicker1.TabIndex = 42;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BorderStyle = BorderStyle.FixedSingle;
+            label1.Location = new Point(263, 114);
+            label1.Name = "label1";
+            label1.Size = new Size(324, 22);
+            label1.TabIndex = 43;
+            label1.Text = "Seleccione una fecha para generar las nominas:";
+            label1.Click += label1_Click;
             // 
             // FormNominas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(dateTimePicker1);
             Controls.Add(button1);
-            Controls.Add(labbel_tabla);
-            Controls.Add(lstNominas);
             Name = "FormNominas";
             Text = "FormNominas";
             ResumeLayout(false);
@@ -88,9 +78,8 @@
         }
 
         #endregion
-        private Label labbel_tabla;
-        private ListBox lstNominas;
         private Button button1;
         private DateTimePicker dateTimePicker1;
+        private Label label1;
     }
 }
