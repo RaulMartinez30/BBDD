@@ -16,28 +16,6 @@ namespace BBDD.Presentacion
             InitializeComponent();
         }
 
-
-
-
-        private void txtNamePais_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pais_labbel_Click(object sender, EventArgs e)
-        {
-            
-        }
-        private void txtIDOficina_TextChanged(object sender, EventArgs e) // Id de la oficina
-        {   
-
-        }
-
         private int getId() {
 
             int id = 0;
@@ -61,13 +39,6 @@ namespace BBDD.Presentacion
 
             return id;
         }
-
-        private void cmbPaises_SelectedIndexChanged(object sender, EventArgs e) // Desplegable paises
-        {
-           
-
-        }
-
         public void cargarPaises ()
         {
             try
@@ -88,21 +59,6 @@ namespace BBDD.Presentacion
             {
                 MessageBox.Show("Error cargando países: " + ex.Message);
             }
-        }
-
-        private void txtNameCiudad_TextChanged(object sender, EventArgs e) // Nombre ciudad
-        {
-
-        }
-
-        private void txtDireccion_TextChanged(object sender, EventArgs e) // Direccion
-        {
-
-        }
-
-        private void numBonusOficina_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void ADD_botton_Click(object sender, EventArgs e)

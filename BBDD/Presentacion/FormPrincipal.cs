@@ -17,15 +17,12 @@ namespace BBDD.Presentacion
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            // 1. Creamos la instancia del formulario de países
             FormPaises fPaises = new FormPaises();
 
-            // 2. Configuramos para que se integre en la pestaña
             fPaises.TopLevel = false;
             fPaises.FormBorderStyle = FormBorderStyle.None;
             fPaises.Dock = DockStyle.Fill;
 
-            // 3. Lo añadimos a la TabPage "Paises" que ya tienes definida
             this.Paises.Controls.Add(fPaises);
             fPaises.Show();
         }
@@ -77,7 +74,7 @@ namespace BBDD.Presentacion
                     CargarFormEnTab(f, Nominas);
                 }
             }
-            else if (TablaControlForm.SelectedTab == Informes) // Asegurate de que la pestaña se llama Informes en el diseñador
+            else if (TablaControlForm.SelectedTab == Informes) 
             {
                 if (Informes.Controls.Count == 0)
                 {
@@ -85,7 +82,6 @@ namespace BBDD.Presentacion
                     CargarFormEnTab(f, Informes);
                 }
             }
-            // En FormPrincipal.cs, dentro de TablaControlForm_SelectedIndexChanged
             else if (TablaControlForm.SelectedTab == Oficina)
             {
                 if (Oficina.Controls.Count == 0)
@@ -95,19 +91,18 @@ namespace BBDD.Presentacion
                 }
                 else
                 {
-                    // Si ya está cargado, buscamos el formulario y refrescamos los combos
+                    // Refrescamos los combos
                     foreach (Control c in Oficina.Controls)
                     {
                         if (c is FormOficina fOfi)
                         {
-                            fOfi.cargarPaises(); // ¡Y listo! Actualizado sin reiniciar
+                            fOfi.cargarPaises();
                         }
                     }
                 }
             }
         }
 
-        // Método auxiliar para no escribir lo mismo 4 veces (Limpieza nivel pro)
         private void CargarFormEnTab(Form formularioHijo, TabPage pestañaDestino)
         {
             formularioHijo.TopLevel = false;

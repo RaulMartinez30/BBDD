@@ -12,7 +12,7 @@ namespace BBDD.Dominio
     {
         AgenteBD agente = AgenteBD.GetInstance();
 
-        // ── 1. ¿Ya existen nóminas para ese año-mes? ───────────────────────
+        // Verificador de Nominas Año-Mes
         public bool ExisteNominaMes(int anio, int mes)
         {
             string sql = "SELECT COUNT(*) FROM MonthlyPayments WHERE payYear = " + anio + " AND payMonth = " + mes;
@@ -20,7 +20,7 @@ namespace BBDD.Dominio
             return int.Parse(result[0][0]) > 0;
         }
 
-        // ── 2. IDs de empleados con algún puesto activo en el mes ──────────
+        // IDs de empleados con algún puesto activo en el mes
         public List<int> GetEmpleadosActivosEnMes(int anio, int mes)
         {
             DateTime primerDia = new DateTime(anio, mes, 1);
@@ -38,7 +38,7 @@ namespace BBDD.Dominio
             return lista;
         }
 
-        // ── 3. Puestos activos de un empleado concreto en el mes ───────────
+        // Puestos activos de un empleado concreto en el mes
         public List<PuestoMes> GetPuestosDeEmpleadoEnMes(int idEmpleado, int anio, int mes)
         {
             DateTime primerDia = new DateTime(anio, mes, 1);
@@ -66,7 +66,7 @@ namespace BBDD.Dominio
             return lista;
         }
 
-        // ── 4. Días totales trabajados hasta una fecha (para trienios) ─────
+        // Días totales trabajados hasta una fecha (trienios)
         public int GetDiasTrabajadosHasta(int idEmpleado, DateTime fechaLimite)
         {
             string limite = fechaLimite.ToString("yyyy-MM-dd");
@@ -79,7 +79,7 @@ namespace BBDD.Dominio
             return int.Parse(result[0][0]);
         }
 
-        // ── 5. Tasa de impuesto del país donde trabaja el empleado ese mes ─
+        // Tasa de impuesto del empleado
         public decimal GetTasaImpuesto(int idEmpleado, int anio, int mes)
         {
             DateTime primerDia = new DateTime(anio, mes, 1);
@@ -98,7 +98,7 @@ namespace BBDD.Dominio
             return decimal.Parse(result[0][0]) / 100;
         }
 
-        // ── 6. Insertar nóminas en BD ──────────────────────────────────────
+        // Insertar nóminas en BD
         public void InsertarNominas(List<Nominas> nominas)
         {
             for (int i = 0; i < nominas.Count; i++)

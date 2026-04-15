@@ -65,7 +65,6 @@
             numBonusOficina.Name = "numBonusOficina";
             numBonusOficina.Size = new Size(182, 27);
             numBonusOficina.TabIndex = 23;
-            numBonusOficina.ValueChanged += numBonusOficina_ValueChanged;
             // 
             // lstOficina
             // 
@@ -148,7 +147,6 @@
             label2.Size = new Size(61, 22);
             label2.TabIndex = 16;
             label2.Text = "Ciudad:";
-            label2.Click += label2_Click;
             // 
             // txtNameCiudad
             // 
@@ -156,7 +154,6 @@
             txtNameCiudad.Name = "txtNameCiudad";
             txtNameCiudad.Size = new Size(182, 27);
             txtNameCiudad.TabIndex = 15;
-            txtNameCiudad.TextChanged += txtNameCiudad_TextChanged;
             // 
             // label1
             // 
@@ -175,7 +172,6 @@
             txtIDOficina.Name = "txtIDOficina";
             txtIDOficina.Size = new Size(182, 27);
             txtIDOficina.TabIndex = 13;
-            txtIDOficina.TextChanged += txtIDOficina_TextChanged;
             // 
             // cmbPaises
             // 
@@ -184,7 +180,6 @@
             cmbPaises.Name = "cmbPaises";
             cmbPaises.Size = new Size(151, 28);
             cmbPaises.TabIndex = 27;
-            cmbPaises.SelectedIndexChanged += cmbPaises_SelectedIndexChanged;
             // 
             // Pais_labbel
             // 
@@ -195,7 +190,6 @@
             Pais_labbel.Size = new Size(36, 22);
             Pais_labbel.TabIndex = 26;
             Pais_labbel.Text = "Pais";
-            Pais_labbel.Click += Pais_labbel_Click;
             // 
             // label4
             // 
@@ -213,7 +207,6 @@
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(182, 27);
             txtDireccion.TabIndex = 28;
-            txtDireccion.TextChanged += txtDireccion_TextChanged;
             // 
             // FormOficina
             // 

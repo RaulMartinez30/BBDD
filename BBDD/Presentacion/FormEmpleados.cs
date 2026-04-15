@@ -27,12 +27,9 @@ namespace BBDD.Presentacion
             {
                 Pais p = new Pais();
 
-
-                List<Pais> lista = p.ReadAllPaises();
-
+                List<Pais> lista = p.ReadAllPaises()
 
                 cmbPaises.DataSource = lista;
-
 
                 cmbPaises.DisplayMember = "Name";
                 cmbPaises.ValueMember = "Id";
@@ -183,8 +180,7 @@ namespace BBDD.Presentacion
 
             }
 
-        }
-
+        
         private void DELETE_botton_Click(object sender, EventArgs e)
         {
             Empleado c = new Empleado(int.Parse(txtIDEmpleado.Text));
@@ -216,7 +212,5 @@ namespace BBDD.Presentacion
                 }
             }
         }
-
-       
     }
 }

@@ -24,7 +24,7 @@ namespace BBDD.Presentacion
             cargarPosiciones();
         }
 
-        // 🔹 Recargar empleados al abrir combo
+        // Recargar empleados al abrir combo
         private void cmbEmpleados_DropDown(object sender, EventArgs e)
         {
             Empleado emp = new Empleado();
@@ -33,7 +33,7 @@ namespace BBDD.Presentacion
             cmbEmpleados.ValueMember = "Id";
         }
 
-        // 🔹 Recargar oficinas al abrir combo
+        // Recargar oficinas al abrir combo
         private void cmbOficinas_DropDown(object sender, EventArgs e)
         {
             Oficina ofi = new Oficina();
@@ -93,7 +93,14 @@ namespace BBDD.Presentacion
                 p.Name = txtNamePosicion.Text;
                 p.YearSalary = numYearSalary.Value;
                 p.StartDate = dtpStartDate.Value;
-                p.EndDate = chkActual.Checked ? (DateTime?)null : dtpEndDate.Value;
+                if (chkActual.Checked)
+                {
+                    p.EndDate = null;
+                }
+                else
+                {
+                    p.EndDate = dtpEndDate.Value;
+                }
 
                 try
                 {
@@ -123,7 +130,14 @@ namespace BBDD.Presentacion
                 p.Name = txtNamePosicion.Text;
                 p.YearSalary = numYearSalary.Value;
                 p.StartDate = dtpStartDate.Value;
-                p.EndDate = chkActual.Checked ? (DateTime?)null : dtpEndDate.Value;
+                if (chkActual.Checked)
+                {
+                    p.EndDate = null;
+                }
+                else
+                {
+                    p.EndDate = dtpEndDate.Value;
+                }
 
                 try
                 {

@@ -35,7 +35,6 @@ namespace BBDD.Presentacion
 
 
                 Nominas aux = new Nominas();
-                // Tendrás que crear este método en Nominas.cs
                 if (aux.CheckIfNominaExists(anioSeleccionado, mesSeleccionado))
                 {
                     MessageBox.Show("Ya se ha generado previamente la información para este año-mes.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
