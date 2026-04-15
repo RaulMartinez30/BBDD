@@ -85,6 +85,26 @@ namespace BBDD.Presentacion
                     CargarFormEnTab(f, Informes);
                 }
             }
+            // En FormPrincipal.cs, dentro de TablaControlForm_SelectedIndexChanged
+            else if (TablaControlForm.SelectedTab == Oficina)
+            {
+                if (Oficina.Controls.Count == 0)
+                {
+                    FormOficina f = new FormOficina();
+                    CargarFormEnTab(f, Oficina);
+                }
+                else
+                {
+                    // Si ya está cargado, buscamos el formulario y refrescamos los combos
+                    foreach (Control c in Oficina.Controls)
+                    {
+                        if (c is FormOficina fOfi)
+                        {
+                            fOfi.cargarPaises(); // ¡Y listo! Actualizado sin reiniciar
+                        }
+                    }
+                }
+            }
         }
 
         // Método auxiliar para no escribir lo mismo 4 veces (Limpieza nivel pro)

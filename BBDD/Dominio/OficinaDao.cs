@@ -37,7 +37,7 @@ namespace BBDD.Dominio
         public static  int Update(Oficina o)
         {
 
-            string sql = "UPDATE offices SET offCountry = '" + o.pais + "', offCity = " + o.NameCiudad + "', offAddress = "+o.Direccion+"',offThreeYearBonus = "+o.Bonus+"  WHERE idOffice= '" + o.Id + "'";
+            string sql = "UPDATE offices SET offCountry = '" + o.pais.Id + "', offCity = '" + o.NameCiudad + "', offAddress = '" + o.Direccion + "', offThreeYearBonus = " + o.Bonus.ToString().Replace(",", ".") + " WHERE idOffice = " + o.Id;
             return AgenteBD.GetInstance().Change(sql);
         }
 

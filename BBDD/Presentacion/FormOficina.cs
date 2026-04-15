@@ -33,13 +33,6 @@ namespace BBDD.Presentacion
         {
             
         }
-
-        private void cmbPaises_TextUpdate(object sender, EventArgs e)
-        {
-            cargarPaises();
-        }
-
-
         private void txtIDOficina_TextChanged(object sender, EventArgs e) // Id de la oficina
         {   
 
@@ -75,7 +68,7 @@ namespace BBDD.Presentacion
 
         }
 
-        private void cargarPaises ()
+        public void cargarPaises ()
         {
             try
             {
@@ -142,40 +135,40 @@ namespace BBDD.Presentacion
             }
         }
 
+    
+
         private void UPDATE_botton_Click(object sender, EventArgs e)
         {
-
-            if (txtIDOficina.Text != string.Empty && (String) cmbPaises.SelectedItem != String.Empty)
+            
+            if (!string.IsNullOrEmpty(txtIDOficina.Text) && cmbPaises.SelectedItem != null)
             {
-
                 Oficina o = new Oficina(int.Parse(txtIDOficina.Text));
+
+                
+                o.pais = (Pais)cmbPaises.SelectedItem;
+
                 o.NameCiudad = txtNameCiudad.Text;
                 o.Direccion = txtDireccion.Text;
-                o.Bonus = (int) numBonusOficina.Value;
+                o.Bonus = numBonusOficina.Value;
+
                 try
                 {
-                    int val = o.UpdateOficina();
-                    if (val == 1)
+                    if (o.UpdateOficina() == 1) 
                     {
+                      
                         int index = lstOficina.SelectedIndex;
                         lstOficina.Items.RemoveAt(index);
                         lstOficina.Items.Insert(index, o);
                         CLEAN_botton.PerformClick();
                     }
-                    else
-                    {
-                        MessageBox.Show("DELETE return != 1", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Error en DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
-
-
         }
+
 
         public void FormOficina_Load(object sender, EventArgs e)
         {
