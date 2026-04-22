@@ -27,7 +27,7 @@ namespace BBDD.Presentacion
             {
                 Pais p = new Pais();
 
-                List<Pais> lista = p.ReadAllPaises()
+                List<Pais> lista = p.ReadAllPaises();
 
                 cmbPaises.DataSource = lista;
 
@@ -179,6 +179,7 @@ namespace BBDD.Presentacion
                 ADD_botton.Enabled = false;
 
             }
+        }
 
         
         private void DELETE_botton_Click(object sender, EventArgs e)
