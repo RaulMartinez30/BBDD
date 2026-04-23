@@ -132,7 +132,7 @@ namespace BBDD.Dominio
                 "AND p.posStartDate <= LAST_DAY('" + anio + "-" + mesStr + "-01') " +
                 "AND (p.posEndDate IS NULL OR p.posEndDate >= '" + anio + "-" + mesStr + "-01') " +
                 "JOIN Offices o ON o.idOffice = p.posOffice " +
-                "WHERE mp.payYear = " + anio + " AND mp.payMonth = " + mes +
+                "WHERE mp.payYear = " + anio + " AND mp.payMonth = " + mes + " " +
                 "AND o.idOffice = " + idOficina + " " +
                 "GROUP BY o.idOffice, o.offCity, mp.payYear, mp.payMonth";
 
@@ -169,7 +169,7 @@ namespace BBDD.Dominio
                 "JOIN Offices   o ON o.idOffice  = p.posOffice " +
                 "JOIN Countries c ON c.idCountry = o.offCountry " +
                 "GROUP BY c.idCountry, c.couName, mp.payYear, mp.payMonth " +
-                "ORDER BY c.couName, mp.payYear DESC, mp.payMonth DESC";
+                "ORDER BY c.couName, mp.payYear DESC, mp.payMonth ASC";
 
             List<string[]> data = agente.Read(sql);
 
