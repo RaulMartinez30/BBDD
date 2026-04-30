@@ -10,28 +10,20 @@ namespace BBDD.Dominio
         AgenteBD agente = AgenteBD.GetInstance();
 
         // INFORME 1: Nóminas de un mes ordenadas de mayor a menor
-        // idOficina == -1 == todas las oficinas
         public DataTable GetNominasPorMes(int anio, int mes, int idOficina)
         {
             string mesStr = mes.ToString("D2");
-            string filtroOficina;
-            if (idOficina != -1)
-            {
-                filtroOficina = " AND o.idOffice = " + idOficina;
-            }
-            else
-            {
-                filtroOficina = "";
-            }
+            string filtroOficina = (idOficina != -1) ? " AND o.idOffice = " + idOficina : "";
 
             string sql =
-                "SELECT e.empName, o.offCity, mp.payYear, mp.payMonth, mp.paySalaryGross, mp.paySalaryNet, mp.payBonusApplied " +
+                "SELECT e.empName, o.offCity, c.couTaxBase, mp.payYear, mp.payMonth, mp.paySalaryGross, mp.paySalaryNet, mp.payBonusApplied " +
                 "FROM MonthlyPayments mp " +
                 "JOIN Employees e ON e.idEmployee = mp.payEmployee " +
                 "JOIN Positions p ON p.posEmployee = mp.payEmployee " +
                 "AND p.posStartDate <= LAST_DAY('" + anio + "-" + mesStr + "-01') " +
                 "AND (p.posEndDate IS NULL OR p.posEndDate >= '" + anio + "-" + mesStr + "-01') " +
                 "JOIN Offices o ON o.idOffice = p.posOffice " +
+                "JOIN Countries c ON c.idCountry = o.offCountry " + // <-- Enganchamos el país
                 "WHERE mp.payYear = " + anio + " AND mp.payMonth = " + mes + filtroOficina +
                 " ORDER BY mp.paySalaryGross DESC";
 
@@ -40,6 +32,7 @@ namespace BBDD.Dominio
             DataTable tabla = new DataTable();
             tabla.Columns.Add("Empleado");
             tabla.Columns.Add("Oficina");
+            tabla.Columns.Add("Impuesto País %"); // <-- Nueva columna
             tabla.Columns.Add("Año");
             tabla.Columns.Add("Mes");
             tabla.Columns.Add("Salario Bruto");
@@ -49,21 +42,27 @@ namespace BBDD.Dominio
             for (int i = 0; i < data.Count; i++)
             {
                 string[] row = data[i];
-
-                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6]);
+                // Hemos movido los índices para que cuadren con las 8 columnas
+                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
             }
 
             return tabla;
         }
 
         // INFORME 2: Todas las nóminas de un Solo empleado
+
         public DataTable GetNominasPorEmpleado(int idEmpleado)
         {
             string sql =
-                "SELECT e.empName, mp.payYear, mp.payMonth, " +
+                "SELECT e.empName, c.couTaxBase, mp.payYear, mp.payMonth, " +
                 "mp.paySalaryGross, mp.paySalaryNet, mp.payBonusApplied " +
                 "FROM MonthlyPayments mp " +
                 "JOIN Employees e ON e.idEmployee = mp.payEmployee " +
+                "JOIN Positions p ON p.posEmployee = mp.payEmployee " +
+                "AND p.posStartDate <= LAST_DAY(CONCAT(mp.payYear, '-', LPAD(mp.payMonth, 2, '0'), '-01')) " +
+                "AND (p.posEndDate IS NULL OR p.posEndDate >= CONCAT(mp.payYear, '-', LPAD(mp.payMonth, 2, '0'), '-01')) " +
+                "JOIN Offices o ON o.idOffice = p.posOffice " +
+                "JOIN Countries c ON c.idCountry = o.offCountry " +
                 "WHERE mp.payEmployee = " + idEmpleado + " " +
                 "ORDER BY mp.payYear DESC, mp.payMonth DESC";
 
@@ -71,6 +70,7 @@ namespace BBDD.Dominio
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("Empleado");
+            tabla.Columns.Add("Impuesto País %");
             tabla.Columns.Add("Año");
             tabla.Columns.Add("Mes");
             tabla.Columns.Add("Salario Bruto");
@@ -80,8 +80,7 @@ namespace BBDD.Dominio
             for (int i = 0; i < data.Count; i++)
             {
                 string[] row = data[i];
-
-                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
+                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6]);
             }
 
             return tabla;
@@ -93,27 +92,30 @@ namespace BBDD.Dominio
             string hoy = DateTime.Now.ToString("yyyy-MM-dd");
 
             string sql =
-                "SELECT o.offCity, e.empName, " +
-                "FLOOR(SUM(DATEDIFF(LEAST(IFNULL(p.posEndDate, '" + hoy + "'), '" + hoy + "'), p.posStartDate) + 1) / 1095) AS trienios " +
+                "SELECT o.offCity, c.couTaxBase, e.empName, " +
+                "FLOOR(SUM(DATEDIFF(LEAST(IFNULL(p.posEndDate, '" + hoy + "'), '" + hoy + "'), p.posStartDate) + 1) / 1095) AS trienios, " +
+                "SUM(DATEDIFF(LEAST(IFNULL(p.posEndDate, '" + hoy + "'), '" + hoy + "'), p.posStartDate) + 1) AS diasTrabajados " +
                 "FROM Positions p " +
                 "JOIN Employees e ON e.idEmployee = p.posEmployee " +
                 "JOIN Offices   o ON o.idOffice   = p.posOffice " +
+                "JOIN Countries c ON c.idCountry = o.offCountry " +
                 "WHERE p.posStartDate <= '" + hoy + "' " +
-                "GROUP BY o.idOffice, o.offCity, e.idEmployee, e.empName " +
+                "GROUP BY o.idOffice, o.offCity, c.couTaxBase, e.idEmployee, e.empName " +
                 "ORDER BY o.offCity, e.empName";
 
             List<string[]> data = agente.Read(sql);
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("Oficina");
+            tabla.Columns.Add("Impuesto País %");
             tabla.Columns.Add("Empleado");
             tabla.Columns.Add("Trienios");
+            tabla.Columns.Add("Dias Trabajados");
 
             for (int i = 0; i < data.Count; i++)
             {
                 string[] row = data[i];
-
-                tabla.Rows.Add(row[0], row[1], row[2]);
+                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4]);
             }
 
             return tabla;
@@ -125,21 +127,23 @@ namespace BBDD.Dominio
             string mesStr = mes.ToString("D2");
 
             string sql =
-                "SELECT o.offCity, mp.payYear, mp.payMonth, " +
+                "SELECT o.offCity, c.couTaxBase, mp.payYear, mp.payMonth, " +
                 "COUNT(mp.idMonthlyPayment), SUM(mp.paySalaryGross), SUM(mp.paySalaryNet) " +
                 "FROM MonthlyPayments mp " +
                 "JOIN Positions p ON p.posEmployee = mp.payEmployee " +
                 "AND p.posStartDate <= LAST_DAY('" + anio + "-" + mesStr + "-01') " +
                 "AND (p.posEndDate IS NULL OR p.posEndDate >= '" + anio + "-" + mesStr + "-01') " +
                 "JOIN Offices o ON o.idOffice = p.posOffice " +
-                "WHERE mp.payYear = " + anio + " AND mp.payMonth = " + mes + " " +
-                "AND o.idOffice = " + idOficina + " " +
-                "GROUP BY o.idOffice, o.offCity, mp.payYear, mp.payMonth";
+                "JOIN Countries c ON c.idCountry = o.offCountry " +
+                "WHERE mp.payYear = " + anio + " AND mp.payMonth = " + mes +
+                " AND o.idOffice = " + idOficina + " " +
+                "GROUP BY o.idOffice, o.offCity, c.couTaxBase, mp.payYear, mp.payMonth";
 
             List<string[]> data = agente.Read(sql);
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("Oficina");
+            tabla.Columns.Add("Impuesto País %");
             tabla.Columns.Add("Año");
             tabla.Columns.Add("Mes");
             tabla.Columns.Add("Nº Nóminas");
@@ -149,8 +153,7 @@ namespace BBDD.Dominio
             for (int i = 0; i < data.Count; i++)
             {
                 string[] row = data[i];
-
-                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
+                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6]);
             }
 
             return tabla;
@@ -159,22 +162,24 @@ namespace BBDD.Dominio
         // INFORME 5: Gasto en nóminas por país en todos los meses
         public DataTable GetGastoPorPaisMes()
         {
+
             string sql =
-                "SELECT c.couName, mp.payYear, mp.payMonth, " +
+                "SELECT c.couName, c.couTaxBase, mp.payYear, mp.payMonth, " +
                 "COUNT(mp.idMonthlyPayment), SUM(mp.paySalaryGross), SUM(mp.paySalaryNet) " +
                 "FROM MonthlyPayments mp " +
                 "JOIN Positions p ON p.posEmployee = mp.payEmployee " +
                 "AND p.posStartDate <= LAST_DAY(CONCAT(mp.payYear, '-', LPAD(mp.payMonth, 2, '0'), '-01')) " +
                 "AND (p.posEndDate IS NULL OR p.posEndDate >= CONCAT(mp.payYear, '-', LPAD(mp.payMonth, 2, '0'), '-01')) " +
-                "JOIN Offices   o ON o.idOffice  = p.posOffice " +
+                "JOIN Offices  o ON o.idOffice  = p.posOffice " +
                 "JOIN Countries c ON c.idCountry = o.offCountry " +
-                "GROUP BY c.idCountry, c.couName, mp.payYear, mp.payMonth " +
-                "ORDER BY c.couName, mp.payYear DESC, mp.payMonth ASC";
+                "GROUP BY c.idCountry, c.couName, c.couTaxBase, mp.payYear, mp.payMonth " +
+                "ORDER BY c.couName, mp.payYear DESC, mp.payMonth DESC";
 
             List<string[]> data = agente.Read(sql);
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("País");
+            tabla.Columns.Add("Impuesto País %");
             tabla.Columns.Add("Año");
             tabla.Columns.Add("Mes");
             tabla.Columns.Add("Nº Nóminas");
@@ -184,8 +189,7 @@ namespace BBDD.Dominio
             for (int i = 0; i < data.Count; i++)
             {
                 string[] row = data[i];
-
-                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
+                tabla.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5], row[6]);
             }
 
             return tabla;
