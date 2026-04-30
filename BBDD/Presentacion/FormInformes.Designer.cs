@@ -99,10 +99,10 @@
             // 
             dtpFecha.CustomFormat = "MM/yyyy";
             dtpFecha.Format = DateTimePickerFormat.Custom;
-            dtpFecha.Location = new Point(460, 55);
+            dtpFecha.Location = new Point(458, 56);
             dtpFecha.Name = "dtpFecha";
             dtpFecha.ShowUpDown = true;
-            dtpFecha.Size = new Size(120, 27);
+            dtpFecha.Size = new Size(141, 27);
             dtpFecha.TabIndex = 3;
             dtpFecha.ValueChanged += dtpFecha_ValueChanged;
             // 

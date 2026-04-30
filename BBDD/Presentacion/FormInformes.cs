@@ -39,6 +39,9 @@ namespace BBDD.Presentacion
         {
             Oficina ofi = new Oficina();
             List<Oficina> listaOficinas = ofi.ReadAllOficinas();
+            Oficina todas = new Oficina(-1);
+            todas.NameCiudad = "TODAS LAS OFICINAS";
+            listaOficinas.Insert(0, todas);
             cmbOficinas.DataSource = null;
             cmbOficinas.DataSource = listaOficinas;
             cmbOficinas.DisplayMember = "NameCiudad";
@@ -51,7 +54,8 @@ namespace BBDD.Presentacion
             cmbEmpleados.DisplayMember = "Name";
             cmbEmpleados.ValueMember = "Id";
 
-            dtpFecha.Value = DateTime.Now.AddMonths(-1);
+            DateTime hoy = DateTime.Now;
+            dtpFecha.Value = new DateTime(hoy.Year, hoy.Month, 1).AddMonths(-1);
         }
 
         private void cmbTipoInforme_SelectedIndexChanged(object sender, EventArgs e)
@@ -162,7 +166,13 @@ namespace BBDD.Presentacion
 
         private void cmbEmpleados_SelectedIndexChanged(object sender, EventArgs e) { }
         private void cmbOficinas_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void dtpFecha_ValueChanged(object sender, EventArgs e) { }
+        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpFecha.Value.Day != 1)
+            {
+                dtpFecha.Value = new DateTime(dtpFecha.Value.Year, dtpFecha.Value.Month, 1);
+            }
+        }
         private void dgvResultados_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }
 }
